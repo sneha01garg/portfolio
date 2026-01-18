@@ -89,20 +89,19 @@ const projectsData = [
   }
 ];
 
+// Global function to open project modal
+function openProjectModal(projectId) {
+  console.log('clicked', projectId);
+  const modal = document.getElementById('project-modal');
+  const projectData = projectsData.find(p => p.id === projectId);
+  
+  if (projectData && modal) {
+    modal.open(projectData);
+  }
+}
 
 function renderProjects() {
   return html`
-    <script>
-      function openProjectModal(projectId) {
-        console.log('clicked', projectId);
-        const modal = document.getElementById('project-modal');
-        const projectData = ${JSON.stringify(projectsData)}.find(p => p.id === projectId);
-        
-        if (projectData && modal) {
-          modal.open(projectData);
-        }
-      }
-    </script>
     <div class="container section" id="projects-section">
       <h1>My Works</h1>
       <div class="projects-grid">
