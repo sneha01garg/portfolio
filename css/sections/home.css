@@ -1,0 +1,19 @@
+#home-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: yellow;
+  height: calc(100vh - 110px);
+  width: 100vw;
+}
+
+#home-section h1{
+  font-size: 120px;
+  font: 'Montserrat';
+}
+
+#home-section p{
+  font-size: 25px;
+  font: 'Montserrat';
+}

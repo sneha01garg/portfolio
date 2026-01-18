@@ -1,0 +1,44 @@
+nav-bar {
+  height: 110px;
+  display: block;
+  background-color: #222;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav-bar::part(container) {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+nav-bar::part(logo) {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+nav-bar::part(nav-links) {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+nav-bar::part(nav-link) {
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+nav-bar::part(nav-link):hover,
+nav-bar::part(nav-link.active) {
+  border-bottom-color: #007bff;
+}

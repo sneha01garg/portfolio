@@ -1,0 +1,43 @@
+#about-section {
+  padding: 10% 20%;
+  display: flex;
+  background-color: #1f1f1f;
+  justify-items: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.my-image {
+  z-index: 2;
+}
+
+.about-me {
+  display: flex;
+  flex-direction: column;
+  width: 448px;
+  gap: 40px;
+}
+
+.about-me-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-me-header p{
+  color: #ffbbc9;
+  font: Red Rose;
+  font-weight: 700;
+  font-size: 40px;
+  font-style: bold;
+  line-height: 109%;
+}
+
+.about-me-description {
+  color: white;
+  font: Lato;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 128%;
+  letter-spacing: 7%;
+}
