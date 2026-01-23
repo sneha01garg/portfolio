@@ -1,72 +1,91 @@
 class ProjectModal extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
-
-  connectedCallback() {
-    this.render();
-    this.setupEventListeners();
-  }
-
-  static get observedAttributes() {
-    return ['open', 'title', 'tools', 'type', 'image', 'description'];
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (oldValue !== newValue) {
-      this.render();
-    }
-  }
-
-  setupEventListeners() {
-    const closeBtn = this.shadowRoot.querySelector('.close-btn');
-    const backdrop = this.shadowRoot.querySelector('.modal-backdrop');
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => this.close());
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
     }
 
-    if (backdrop) {
-      backdrop.addEventListener('click', (e) => {
-        if (e.target === backdrop) {
-          this.close();
+    connectedCallback() {
+        this.render();
+        this.setupEventListeners();
+    }
+
+    static get observedAttributes() {
+        return ['open', 'title', 'tools', 'type', 'image', 'description', 'images'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue !== newValue) {
+            this.render();
         }
-      });
     }
 
-    // ESC key to close
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.getAttribute('open') === 'true') {
-        this.close();
-      }
-    });
-  }
+    setupEventListeners() {
+        const closeBtn = this.shadowRoot.querySelector('.close-btn');
+        const backdrop = this.shadowRoot.querySelector('.modal-backdrop');
 
-  open(projectData) {
-    this.setAttribute('open', 'true');
-    this.setAttribute('title', projectData.title);
-    this.setAttribute('tools', projectData.tools);
-    this.setAttribute('type', projectData.type);
-    this.setAttribute('image', projectData.image);
-    this.setAttribute('description', projectData.description);
-    document.body.style.overflow = 'hidden';
-  }
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.close());
+        }
 
-  close() {
-    this.setAttribute('open', 'false');
-    document.body.style.overflow = '';
-  }
+        if (backdrop) {
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop) {
+                    this.close();
+                }
+            });
+        }
 
-  render() {
-    const isOpen = this.getAttribute('open') === 'true';
-    const title = this.getAttribute('title') || '';
-    const tools = this.getAttribute('tools') || '';
-    const type = this.getAttribute('type') || '';
-    const image = this.getAttribute('image') || '';
-    const description = this.getAttribute('description') || '';
+        // ESC key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.getAttribute('open') === 'true') {
+                this.close();
+            }
+        });
+    }
 
-    this.shadowRoot.innerHTML = `
+    open(projectData) {
+        this.setAttribute('open', 'true');
+        this.setAttribute('title', projectData.title);
+        this.setAttribute('tools', projectData.tools);
+        this.setAttribute('type', projectData.type);
+        this.setAttribute('image', projectData.image);
+        this.setAttribute('description', projectData.description);
+        // Serialize images array to string
+        const images = projectData.images ? JSON.stringify(projectData.images) : '[]';
+        this.setAttribute('images', images);
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        this.setAttribute('open', 'false');
+        document.body.style.overflow = '';
+    }
+
+    render() {
+        const isOpen = this.getAttribute('open') === 'true';
+        const title = this.getAttribute('title') || '';
+        const tools = this.getAttribute('tools') || '';
+        const type = this.getAttribute('type') || '';
+        const image = this.getAttribute('image') || '';
+        const description = this.getAttribute('description') || '';
+        const imagesStr = this.getAttribute('images') || '[]';
+        let images = [];
+        try {
+            images = JSON.parse(imagesStr);
+        } catch (e) {
+            images = [];
+        }
+
+        // If no images array but we have a main image, stick it in
+        if (images.length === 0 && image) {
+            images = [image];
+        }
+
+        // Separate main image (first) and others
+        const mainImage = images.length > 0 ? images[0] : image;
+        const otherImages = images.length > 1 ? images.slice(1) : [];
+
+        this.shadowRoot.innerHTML = `
             <style>
                 * {
                     margin: 0;
@@ -89,6 +108,7 @@ class ProjectModal extends HTMLElement {
                 }
 
                 .modal-content {
+                    padding: 0 8%;
                     position: relative;
                     width: 100%;
                     max-width: 1200px;
@@ -189,6 +209,7 @@ class ProjectModal extends HTMLElement {
                     grid-template-columns: 1fr 1fr;
                     gap: 40px;
                     margin-top: 30px;
+                    margin-bottom: 40px;
                 }
 
                 .description p {
@@ -197,8 +218,14 @@ class ProjectModal extends HTMLElement {
                     color: #ccc;
                 }
 
+                .secondary-images {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 30px;
+                }
+
                 .secondary-image {
-                    margin-top: 30px;
+                    width: 100%;
                 }
 
                 .secondary-image img {
@@ -251,16 +278,24 @@ class ProjectModal extends HTMLElement {
                         <button class="close-btn">×</button>
                     </div>
                     <div class="modal-body">
-                        <div class="main-image">
-                            <img src="${image}" alt="${title}">
-                        </div>
+                        ${mainImage ? `
+                            <div class="main-image">
+                                <img src="${mainImage}" alt="${title}">
+                            </div>
+                        ` : ''}
+                        
                         <div class="description">
                             <p>${description}</p>
                             <p>${description}</p>
                         </div>
-                        ${image ? `
-                            <div class="secondary-image">
-                                <img src="${image}" alt="${title} detail">
+
+                        ${otherImages.length > 0 ? `
+                            <div class="secondary-images">
+                                ${otherImages.map(img => `
+                                    <div class="secondary-image">
+                                        <img src="${img}" alt="${title} view">
+                                    </div>
+                                `).join('')}
                             </div>
                         ` : ''}
                     </div>
@@ -268,11 +303,11 @@ class ProjectModal extends HTMLElement {
             </div>
         `;
 
-    // Re-setup event listeners after render
-    if (isOpen) {
-      this.setupEventListeners();
+        // Re-setup event listeners after render
+        if (isOpen) {
+            this.setupEventListeners();
+        }
     }
-  }
 }
 
 customElements.define('project-modal', ProjectModal);
