@@ -7,6 +7,19 @@ class NavBar extends HTMLElement {
   connectedCallback() {
     this.render();
     this.setupListeners();
+    window.addEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  handleScroll() {
+    if (window.scrollY > 50) {
+      this.classList.add('scrolled');
+    } else {
+      this.classList.remove('scrolled');
+    }
   }
 
   setupListeners() {
@@ -45,9 +58,7 @@ class NavBar extends HTMLElement {
             <style>
                 :host {
                     display: block;
-                    background-color: #222;
                     padding: 20px 0;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 }
 
                 .navbar {

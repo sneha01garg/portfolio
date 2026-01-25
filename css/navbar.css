@@ -1,12 +1,24 @@
 nav-bar {
-  height: 110px;
+  height: auto;
   display: block;
-  background-color: #222;
+  background-color: rgba(15, 15, 15, 0);
   padding: 20px 0;
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
   z-index: 1000;
+  box-shadow: none;
+  transition: all 0.3s ease-in-out;
+}
+
+nav-bar.scrolled {
+  background-color: rgba(33, 33, 33, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 27px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  width: calc(100% - 40px);
+  padding: 10px 0;
 }
 
 nav-bar::part(container) {

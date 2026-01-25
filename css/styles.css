@@ -6,7 +6,6 @@
 
 html {
   scroll-snap-type: y mandatory;
-  scroll-padding-top: 110px;
   /* Account for sticky navbar */
   scroll-behavior: smooth;
 }
@@ -37,7 +36,7 @@ button {
 .section {
   cursor: none;
   scroll-snap-align: start;
-  min-height: calc(100vh - 110px);
+  min-height: 100vh;
   /* Ensure sections are at least full view height minus navbar */
 }
 
