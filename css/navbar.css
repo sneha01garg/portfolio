@@ -32,7 +32,6 @@ nav-bar::part(nav-links) {
 
 nav-bar::part(nav-link) {
   color: #fff;
-  cursor: pointer;
   padding: 5px 0;
   border-bottom: 2px solid transparent;
   transition: border-color 0.3s;

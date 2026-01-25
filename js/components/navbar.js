@@ -63,7 +63,6 @@ class NavBar extends HTMLElement {
                     font-size: 1.5rem;
                     font-weight: bold;
                     color: #fff;
-                    cursor: pointer;
                 }
 
                 .nav-links {
@@ -74,7 +73,6 @@ class NavBar extends HTMLElement {
 
                 .nav-link {
                     color: #fff;
-                    cursor: pointer;
                     padding: 5px 0;
                     border-bottom: 2px solid transparent;
                     transition: border-color 0.3s;

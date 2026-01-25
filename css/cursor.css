@@ -1,0 +1,66 @@
+/* Hide default cursor globally */
+body {
+    cursor: none;
+}
+
+/* Also hide it on all interactive elements just in case */
+a,
+button,
+input,
+textarea,
+select {
+    cursor: none;
+}
+
+* {
+    cursor: none;
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    z-index: 20000;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    will-change: top, left, transform;
+}
+
+/* Optional: Add a hover effect */
+.custom-cursor.hover {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+.cursor-label {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    /* Rounded rectangle */
+    background-color: white;
+    color: black;
+    /* Inverted by mix-blend-mode if parent has it, or valid if standalone */
+    font-size: 14px;
+    font-weight: 700;
+    pointer-events: none;
+    z-index: 20000;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transform: translate(20px, -50%);
+    /* Start slightly offset */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+}
+
+.cursor-label.visible {
+    opacity: 1;
+    transform: translate(30px, -50%);
+    /* Move to final position */
+}

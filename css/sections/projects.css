@@ -22,7 +22,6 @@
 
 .project-card {
   position: relative;
-  cursor: pointer;
   overflow: hidden;
   transition: transform 0.3s ease;
   z-index: 2;

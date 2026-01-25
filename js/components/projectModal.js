@@ -1,91 +1,91 @@
 class ProjectModal extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
+    this.render();
+    this.setupEventListeners();
+  }
+
+  static get observedAttributes() {
+    return ['open', 'title', 'tools', 'type', 'image', 'description', 'images'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue !== newValue) {
+      this.render();
+    }
+  }
+
+  setupEventListeners() {
+    const closeBtn = this.shadowRoot.querySelector('.close-btn');
+    const backdrop = this.shadowRoot.querySelector('.modal-backdrop');
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => this.close());
     }
 
-    connectedCallback() {
-        this.render();
-        this.setupEventListeners();
-    }
-
-    static get observedAttributes() {
-        return ['open', 'title', 'tools', 'type', 'image', 'description', 'images'];
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (oldValue !== newValue) {
-            this.render();
+    if (backdrop) {
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) {
+          this.close();
         }
+      });
     }
 
-    setupEventListeners() {
-        const closeBtn = this.shadowRoot.querySelector('.close-btn');
-        const backdrop = this.shadowRoot.querySelector('.modal-backdrop');
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.getAttribute('open') === 'true') {
+        this.close();
+      }
+    });
+  }
 
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => this.close());
-        }
+  open(projectData) {
+    this.setAttribute('open', 'true');
+    this.setAttribute('title', projectData.title);
+    this.setAttribute('tools', projectData.tools);
+    this.setAttribute('type', projectData.type);
+    this.setAttribute('image', projectData.image);
+    this.setAttribute('description', projectData.description);
+    // Serialize images array to string
+    const images = projectData.images ? JSON.stringify(projectData.images) : '[]';
+    this.setAttribute('images', images);
+    document.body.style.overflow = 'hidden';
+  }
 
-        if (backdrop) {
-            backdrop.addEventListener('click', (e) => {
-                if (e.target === backdrop) {
-                    this.close();
-                }
-            });
-        }
+  close() {
+    this.setAttribute('open', 'false');
+    document.body.style.overflow = '';
+  }
 
-        // ESC key to close
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.getAttribute('open') === 'true') {
-                this.close();
-            }
-        });
+  render() {
+    const isOpen = this.getAttribute('open') === 'true';
+    const title = this.getAttribute('title') || '';
+    const tools = this.getAttribute('tools') || '';
+    const type = this.getAttribute('type') || '';
+    const image = this.getAttribute('image') || '';
+    const description = this.getAttribute('description') || '';
+    const imagesStr = this.getAttribute('images') || '[]';
+    let images = [];
+    try {
+      images = JSON.parse(imagesStr);
+    } catch (e) {
+      images = [];
     }
 
-    open(projectData) {
-        this.setAttribute('open', 'true');
-        this.setAttribute('title', projectData.title);
-        this.setAttribute('tools', projectData.tools);
-        this.setAttribute('type', projectData.type);
-        this.setAttribute('image', projectData.image);
-        this.setAttribute('description', projectData.description);
-        // Serialize images array to string
-        const images = projectData.images ? JSON.stringify(projectData.images) : '[]';
-        this.setAttribute('images', images);
-        document.body.style.overflow = 'hidden';
+    // If no images array but we have a main image, stick it in
+    if (images.length === 0 && image) {
+      images = [image];
     }
 
-    close() {
-        this.setAttribute('open', 'false');
-        document.body.style.overflow = '';
-    }
+    // Separate main image (first) and others
+    const mainImage = images.length > 0 ? images[0] : image;
+    const otherImages = images.length > 1 ? images.slice(1) : [];
 
-    render() {
-        const isOpen = this.getAttribute('open') === 'true';
-        const title = this.getAttribute('title') || '';
-        const tools = this.getAttribute('tools') || '';
-        const type = this.getAttribute('type') || '';
-        const image = this.getAttribute('image') || '';
-        const description = this.getAttribute('description') || '';
-        const imagesStr = this.getAttribute('images') || '[]';
-        let images = [];
-        try {
-            images = JSON.parse(imagesStr);
-        } catch (e) {
-            images = [];
-        }
-
-        // If no images array but we have a main image, stick it in
-        if (images.length === 0 && image) {
-            images = [image];
-        }
-
-        // Separate main image (first) and others
-        const mainImage = images.length > 0 ? images[0] : image;
-        const otherImages = images.length > 1 ? images.slice(1) : [];
-
-        this.shadowRoot.innerHTML = `
+    this.shadowRoot.innerHTML = `
             <style>
                 * {
                     margin: 0;
@@ -174,7 +174,6 @@ class ProjectModal extends HTMLElement {
                     border: none;
                     color: #fff;
                     font-size: 32px;
-                    cursor: pointer;
                     padding: 0;
                     width: 40px;
                     height: 40px;
@@ -303,11 +302,11 @@ class ProjectModal extends HTMLElement {
             </div>
         `;
 
-        // Re-setup event listeners after render
-        if (isOpen) {
-            this.setupEventListeners();
-        }
+    // Re-setup event listeners after render
+    if (isOpen) {
+      this.setupEventListeners();
     }
+  }
 }
 
 customElements.define('project-modal', ProjectModal);
