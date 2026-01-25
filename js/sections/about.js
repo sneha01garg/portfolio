@@ -10,14 +10,14 @@ function renderAbout() {
             </vertical-fade-text>           
           </div>
           <div class='my-image'>
-            <img src='./assets/my-image.png'>
+            <img src='./assets/my-image.png' data-parallax-speed="-0.1">
           </div>
           <div class='about-me'>
             <div class='about-me-header'>
-              <p>
+              <p data-parallax-speed="0.1">
               Creative Mind,
               </p>
-              <p>
+              <p data-parallax-speed="0.15">
               Strategic Heart
               </p>
             </div>

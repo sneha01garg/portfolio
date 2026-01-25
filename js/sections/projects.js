@@ -145,7 +145,7 @@ function openProjectModal(projectId) {
 function renderProjects() {
   return html`
     <div class="container section" id="projects-section">
-      <h1>My Works</h1>
+      <h1 data-parallax-speed="0.1">My Works</h1>
       <div class="projects-grid">
         ${projectsData.slice(0, 2).map(project => `
           <div class="project-card" 

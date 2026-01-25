@@ -19,4 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       contactForm.reset();
     });
   }
+
+  // Initialize Parallax
+  initParallax();
 });

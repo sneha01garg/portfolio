@@ -11,7 +11,7 @@ function renderContact() {
           </div>
           <div class="contact">
             <div class="contact-header">
-              <p>Ready to connect?</p>
+              <p data-parallax-speed="0.1">Ready to connect?</p>
             </div>
             <div class="contact-cards-container">
               <div class="contact-card">
