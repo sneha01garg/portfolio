@@ -41,6 +41,7 @@ class VerticalFadeText extends HTMLElement {
                 }
 
                 .vertical-text {
+                    line-height: 80%;
                     color: white;
                     font: Montserrat;
                     font-weight: 900;
