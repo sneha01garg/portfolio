@@ -1,9 +1,10 @@
 #about-section {
-  padding: 10% 20%;
+  padding: 10% 0;
   display: flex;
   background-color: #1f1f1f;
   justify-items: center;
-  justify-content: space-between;
+  gap: 50px;
+  justify-content: center;
   align-items: center;
 }
 
@@ -24,7 +25,7 @@
   gap: 10px;
 }
 
-.about-me-header p{
+.about-me-header p {
   color: #ffbbc9;
   font: Red Rose;
   font-weight: 700;
