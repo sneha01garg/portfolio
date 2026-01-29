@@ -10,7 +10,7 @@ function renderAbout() {
             </vertical-fade-text>           
           </div>
           <div class='my-image'>
-            <img src='./assets/my-image.png' data-parallax-speed="-0.1">
+            <img src='./assets/my-works/aboutme/my-image.png' data-parallax-speed="-0.1">
           </div>
           <div class='about-me'>
             <div class='about-me-header'>
@@ -22,10 +22,19 @@ function renderAbout() {
               </p>
             </div>
             <div class='about-me-description'>
-              We believe great design isn't just about looking good—it's about creating meaningful connections that drive real results. Every project starts with understanding your vision and ends with exceeding your expectations.
+              I’m a passionate visual designer who loves exploring creativity through colors, layouts, and storytelling. I enjoy experimenting with different styles and bringing concepts to life through thoughtful design. I’m always excited to learn, grow, and take on new creative challenges.
             </div>
-            <div class='about-me-description'>
-              We believe great design isn't just about looking good—it's about creating meaningful connections that drive real results. Every project starts with understanding your vision and ends with exceeding your expectations.
+            
+            <div class='about-me-description design-toolkit-container'>
+            <div>
+              <span>Design Toolkit :</span>
+            </div>
+              <div class='tools-row'>
+                <img src='./assets/my-works/aboutme/Figma.svg' alt='Figma'>
+                <img src='./assets/my-works/aboutme/Adobe_Photoshop_CC_icon.svg.png' alt='Photoshop'>
+                <img src='./assets/my-works/aboutme/Adobe_Illustrator_CC_icon.svg.png' alt='Illustrator'>
+                <img src='./assets/my-works/aboutme/Adobe_InDesign_CC_icon.svg.png' alt='InDesign'>
+              </div>
             </div>
           </div>
         </div>

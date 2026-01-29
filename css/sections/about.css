@@ -27,7 +27,7 @@
 
 .about-me-header p {
   color: #ffbbc9;
-  font: Red Rose;
+  font-family: 'Red Rose', serif;
   font-weight: 700;
   font-size: 40px;
   font-style: bold;
@@ -36,9 +36,39 @@
 
 .about-me-description {
   color: white;
-  font: Lato;
-  font-weight: 400;
+  font-family: 'Lato', sans-serif;
+  font-weight: 350;
   font-size: 22px;
-  line-height: 128%;
+  line-height: 150%;
   letter-spacing: 7%;
+}
+
+.design-toolkit-container {
+  color: #ffbbc9;
+  font-family: 'Red Rose', serif;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 20px;
+}
+
+.tools-row {
+  display: flex;
+  gap: 30px;
+  align-items: left;
+}
+
+.tools-row img {
+  height: 50px;
+  width: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  border: 1px solid rgb(20, 20, 20);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.363);
+}
+
+.tools-row img:hover {
+  opacity: 1;
 }

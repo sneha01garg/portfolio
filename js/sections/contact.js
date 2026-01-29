@@ -19,7 +19,7 @@ function renderContact() {
                   Email
                 </div>
                 <div class="contact-card-value">
-                  work@gmail.com
+                  work01sneha@gmail.com
                 </div>
               </div>
               <div class="contact-card">
@@ -27,7 +27,7 @@ function renderContact() {
                   LinkedIn
                 </div>
                 <div class="contact-card-value">
-                  work@gmail.com
+                  work01sneha@gmail.com
                 </div>
               </div>
             </div>
