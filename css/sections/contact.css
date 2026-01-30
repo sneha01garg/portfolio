@@ -61,3 +61,66 @@
   letter-spacing: 0;
   color: white;
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  #contact-section {
+    padding: 15% 5%;
+    flex-direction: column;
+  }
+
+  #contact-section .vertical-text {
+    display: none;
+  }
+
+  .contact {
+    gap: 30px;
+  }
+
+  .contact-header p {
+    font-size: clamp(28px, 6vw, 40px);
+    text-align: center;
+  }
+
+  .contact-cards-container {
+    gap: 25px;
+    width: 100%;
+  }
+
+  .contact-card {
+    padding: 30px 40px;
+    border-radius: 18px;
+  }
+
+  .contact-card-title {
+    font-size: 18px;
+  }
+
+  .contact-card-value {
+    font-size: 20px;
+    word-break: break-word;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #contact-section {
+    padding: 10% 10%;
+  }
+
+  .contact-header p {
+    font-size: 36px;
+  }
+
+  .contact-card {
+    padding: 35px 50px;
+  }
+
+  .contact-card-title {
+    font-size: 20px;
+  }
+
+  .contact-card-value {
+    font-size: 23px;
+  }
+}

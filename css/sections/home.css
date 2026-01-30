@@ -36,20 +36,38 @@
   position: relative;
   z-index: 2;
   text-align: center;
+  padding: 0 20px;
 }
 
 #home-section h1 {
-  font-size: 120px;
-  font: 'Montserrat';
+  font-size: clamp(40px, 10vw, 120px);
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   color: white;
-  /* Ensure text is visible on dark background */
+  line-height: 1.1;
 }
 
 #home-section p {
-  font-size: 25px;
-  font: 'Montserrat';
+  font-size: clamp(16px, 3vw, 25px);
+  font-family: 'Montserrat', sans-serif;
   color: white;
-  margin-top: -30px;
-  /* Ensure text is visible on dark background */
+  margin-top: clamp(-20px, -2vw, -30px);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #home-section {
+    padding: 0 15px;
+  }
+
+  .home-content {
+    padding: 0 15px;
+  }
+
+  #home-section h1 {
+    word-break: break-word;
+    line-height: 2 !important;
+  }
+
+
 }

@@ -10,6 +10,7 @@
 
 .my-image {
   z-index: 2;
+
 }
 
 .about-me {
@@ -71,4 +72,76 @@
 
 .tools-row img:hover {
   opacity: 1;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  #about-section {
+    flex-direction: column;
+    padding: 15% 5%;
+    gap: 30px;
+  }
+
+  #about-section .vertical-text {
+    display: none;
+  }
+
+  .my-image {
+    max-width: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: auto;
+  }
+
+  .about-me {
+    width: 100%;
+    max-width: 100%;
+    gap: 25px;
+  }
+
+  .about-me-header p {
+    font-size: clamp(28px, 6vw, 40px);
+    text-align: center;
+  }
+
+  .about-me-description {
+    font-size: clamp(16px, 4vw, 22px);
+    text-align: center;
+  }
+
+  .design-toolkit-container {
+    align-items: center;
+    text-align: center;
+  }
+
+  .tools-row {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .tools-row img {
+    height: 40px;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #about-section {
+    padding: 10% 8%;
+    gap: 40px;
+  }
+
+  .about-me {
+    width: 400px;
+  }
+
+  .about-me-header p {
+    font-size: 36px;
+  }
+
+  .about-me-description {
+    font-size: 20px;
+  }
 }

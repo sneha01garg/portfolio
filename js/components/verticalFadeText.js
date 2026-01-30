@@ -33,6 +33,7 @@ class VerticalFadeText extends HTMLElement {
 
     const rect = container.getBoundingClientRect();
     const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
 
     // Calculate visibility and scroll progress
     const viewportCenter = windowHeight / 2;
@@ -55,8 +56,13 @@ class VerticalFadeText extends HTMLElement {
     // Normalize distance?
     // Let's us pixels directly for control.
 
-    // Base gap at center
-    const baseGap = 70;
+    // Base gap at center - responsive
+    let baseGap = 70;
+    if (windowWidth <= 480) {
+      baseGap = 20;
+    } else if (windowWidth <= 768) {
+      baseGap = 35;
+    }
 
     // Spread factor
     // As it goes UP (negative distance), we want it to spread OUT?
@@ -163,6 +169,35 @@ class VerticalFadeText extends HTMLElement {
                     opacity: 0.06;
                     z-index: 1;
                     ${isRight ? 'transform: translateX(-140px);' : 'transform: translateX(140px) rotate(180deg);'}
+                }
+
+                /* Responsive adjustments */
+                @media (max-width: 768px) {
+                    .vertical-text {
+                        font-size: 60px;
+                    }
+
+                    .text2 {
+                        ${isRight ? 'transform: translateX(-35px);' : 'transform: translateX(35px) rotate(180deg);'}
+                    }
+
+                    .text3 {
+                        ${isRight ? 'transform: translateX(-70px);' : 'transform: translateX(70px) rotate(180deg);'}
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .vertical-text {
+                        font-size: 40px;
+                    }
+
+                    .text2 {
+                        ${isRight ? 'transform: translateX(-20px);' : 'transform: translateX(20px) rotate(180deg);'}
+                    }
+
+                    .text3 {
+                        ${isRight ? 'transform: translateX(-40px);' : 'transform: translateX(40px) rotate(180deg);'}
+                    }
                 }
             </style>
 

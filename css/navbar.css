@@ -53,3 +53,33 @@ nav-bar::part(nav-link):hover,
 nav-bar::part(nav-link.active) {
   border-bottom-color: #007bff;
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  nav-bar {
+    padding: 10px 0;
+  }
+
+  nav-bar.scrolled {
+    margin: 10px;
+    width: calc(100% - 20px);
+    border-radius: 15px;
+  }
+
+  nav-bar::part(container) {
+    padding: 0 15px;
+  }
+
+  nav-bar::part(logo) {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  nav-bar.scrolled {
+    margin: 15px;
+    width: calc(100% - 30px);
+    border-radius: 20px;
+  }
+}

@@ -1,3 +1,11 @@
+:root {
+  /* Breakpoints */
+  --mobile-max: 767px;
+  --tablet-min: 768px;
+  --tablet-max: 1024px;
+  --desktop-min: 1025px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,9 +13,21 @@
 }
 
 html {
-  scroll-snap-type: y mandatory;
-  /* Account for sticky navbar */
   scroll-behavior: smooth;
+}
+
+/* Enable scroll-snap only on larger screens */
+@media (min-width: 768px) {
+  html {
+    scroll-snap-type: y mandatory;
+  }
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 body {
@@ -15,7 +35,6 @@ body {
   line-height: 1.6;
   color: #333;
   background-color: #f9f9f9;
-  /* Ensure body doesn't interfere with scroll */
   min-height: 100vh;
 }
 
@@ -31,33 +50,49 @@ a {
 button {
   border: none;
   font-family: inherit;
+  min-height: 44px;
+  min-width: 44px;
+  cursor: pointer;
 }
 
 .section {
   cursor: none;
   scroll-snap-align: start;
   min-height: 100vh;
-  /* Ensure sections are at least full view height minus navbar */
 }
 
 .section h1 {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 2.5rem);
   margin-bottom: 20px;
   color: #222;
 }
 
 .section h2 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   margin-bottom: 20px;
   color: #333;
 }
 
 .section p {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   color: #bdbcbc;
   line-height: 1.8;
 }
 
 .vertical-text {
   color: white;
+}
+
+/* Mobile/Tablet adjustments */
+@media (max-width: 1024px) {
+  .section {
+    cursor: auto;
+  }
+
+  .vertical-text,
+  .vertical-text-item,
+  vertical-fade-text,
+  custom-cursor {
+    display: none !important;
+  }
 }
