@@ -10,7 +10,7 @@ class ProjectModal extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['open', 'title', 'tools', 'type', 'image', 'description', 'images', 'project-overview', 'key-highlights', 'thumbnail'];
+        return ['open', 'title', 'tools', 'type', 'image', 'description', 'images', 'project-overview', 'key-highlights', 'thumbnail', 'images-scroll', 'image-styles'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -32,6 +32,21 @@ class ProjectModal extends HTMLElement {
                 if (e.target === backdrop) {
                     this.close();
                 }
+            });
+        }
+
+        // Scroll buttons
+        const leftBtn = this.shadowRoot.querySelector('.scroll-btn.left');
+        const rightBtn = this.shadowRoot.querySelector('.scroll-btn.right');
+        const scrollArea = this.shadowRoot.querySelector('.secondary-images.horizontal');
+
+        if (scrollArea && leftBtn && rightBtn) {
+            leftBtn.addEventListener('click', () => {
+                scrollArea.scrollBy({ left: -555, behavior: 'smooth' }); // 525 + 30 gap
+            });
+
+            rightBtn.addEventListener('click', () => {
+                scrollArea.scrollBy({ left: 555, behavior: 'smooth' });
             });
         }
 
@@ -58,6 +73,12 @@ class ProjectModal extends HTMLElement {
 
         const images = projectData.images ? JSON.stringify(projectData.images) : '[]';
         this.setAttribute('images', images);
+
+        this.setAttribute('images-scroll', projectData.imagesScroll || 'vertical'); // Default to vertical
+
+        const imageStyles = projectData.imageStyles ? JSON.stringify(projectData.imageStyles) : '{}';
+        this.setAttribute('image-styles', imageStyles);
+
         document.body.style.overflow = 'hidden';
     }
 
@@ -74,6 +95,15 @@ class ProjectModal extends HTMLElement {
         const image = this.getAttribute('image') || '';
         const description = this.getAttribute('description') || '';
         const projectOverview = this.getAttribute('project-overview') || description; // Fallback to description
+        const imagesScroll = this.getAttribute('images-scroll') || 'vertical';
+
+        const imageStylesStr = this.getAttribute('image-styles') || '{}';
+        let customImageStyles = {};
+        try {
+            customImageStyles = JSON.parse(imageStylesStr);
+        } catch (e) {
+            customImageStyles = {};
+        }
 
         const keyHighlightsStr = this.getAttribute('key-highlights') || '[]';
         let keyHighlights = [];
@@ -239,11 +269,53 @@ class ProjectModal extends HTMLElement {
                     line-height: 1.8;
                     color: #ccc;
                 }
+                
+                /* Container for Scroll + Buttons */
+                .scroll-container {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                }
 
                 .secondary-images {
                     display: flex;
                     flex-direction: column;
                     gap: 30px;
+                    width: 100%;
+                }
+                
+                /* Horizontal Scroll Style */
+                .secondary-images.horizontal {
+                    flex-direction: row;
+                    overflow-x: auto;
+                    scroll-snap-type: x mandatory;
+                    padding-bottom: 20px;
+                    scroll-behavior: smooth;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+                
+                /* Hide scrollbar for Chrome, Safari and Opera */
+                .secondary-images.horizontal::-webkit-scrollbar {
+                    display: none;
+                }
+                
+                /* Nudge Animation */
+                .nudge-anim {
+                    animation: scrollNudge 1.5s ease-in-out 1s;
+                }
+
+                @keyframes scrollNudge {
+                    0%, 100% { transform: translateX(0); }
+                    50% { transform: translateX(-20px); }
+                }
+                
+                .secondary-images.horizontal .secondary-image {
+                    min-width: 525px;
+                    width: 525px;
+                    flex: 0 0 525px;
+                    scroll-snap-align: start;
                 }
 
                 .secondary-image {
@@ -254,6 +326,45 @@ class ProjectModal extends HTMLElement {
                     width: 100%;
                     height: auto;
                     display: block;
+                }
+                
+                /* Scroll Buttons */
+                .scroll-btn {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: rgba(0,0,0,0.6);
+                    color: white;
+                    border: 1px solid rgba(255,255,255,0.3);
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    z-index: 10;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 24px;
+                    transition: all 0.2s ease;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+                
+                .scroll-container:hover .scroll-btn {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+                
+                .scroll-btn:hover {
+                    background: rgba(255,255,255,0.15);
+                    border-color: white;
+                }
+                
+                .scroll-btn.left { left: 10px; }
+                .scroll-btn.right { right: 10px; }
+                
+                .scroll-btn.hidden {
+                    display: none !important;
                 }
 
                 @media (max-width: 768px) {
@@ -283,6 +394,16 @@ class ProjectModal extends HTMLElement {
                     .meta-info {
                         flex-direction: column;
                         gap: 15px;
+                    }
+                    
+                    .secondary-images.horizontal .secondary-image {
+                        min-width: 90%;
+                        width: 90%;
+                        flex: 0 0 90%;
+                    }
+                    
+                    .scroll-btn {
+                        display: none;
                     }
                 }
                 
@@ -327,7 +448,7 @@ class ProjectModal extends HTMLElement {
                     <div class="modal-body">
                         ${mainImage ? `
                             <div class="main-image">
-                                <img src="${mainImage}" alt="${title}">
+                                <img src="${mainImage}" alt="${title}" style="${this.styleMapToString(customImageStyles)}">
                             </div>
                         ` : ''}
                         
@@ -348,12 +469,18 @@ class ProjectModal extends HTMLElement {
                         </div>
 
                         ${otherImages.length > 0 ? `
-                            <div class="secondary-images">
-                                ${otherImages.map(img => `
-                                    <div class="secondary-image">
-                                        <img src="${img}" alt="${title} view">
-                                    </div>
-                                `).join('')}
+                            <div class="scroll-container ${imagesScroll === 'horizontal' ? 'horizontal' : ''}">
+                                ${imagesScroll === 'horizontal' ? '<button class="scroll-btn left">‹</button>' : ''}
+                                
+                                <div class="secondary-images ${imagesScroll === 'horizontal' ? 'horizontal nudge-anim' : ''}">
+                                    ${otherImages.map(img => `
+                                        <div class="secondary-image">
+                                            <img src="${img}" alt="${title} view" style="${this.styleMapToString(customImageStyles)}">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                
+                                ${imagesScroll === 'horizontal' ? '<button class="scroll-btn right">›</button>' : ''}
                             </div>
                         ` : ''}
                     </div>
@@ -365,6 +492,12 @@ class ProjectModal extends HTMLElement {
         if (isOpen) {
             this.setupEventListeners();
         }
+    }
+    // Helper to convert style object to CSS string
+    styleMapToString(styleMap) {
+        return Object.entries(styleMap)
+            .map(([k, v]) => `${k}:${v}`)
+            .join(';');
     }
 }
 

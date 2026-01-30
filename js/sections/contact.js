@@ -19,7 +19,7 @@ function renderContact() {
                   Email
                 </div>
                 <div class="contact-card-value">
-                  work01sneha@gmail.com
+                  <a href="mailto:work01sneha@gmail.com">work01sneha@gmail.com</a>
                 </div>
               </div>
               <div class="contact-card">
@@ -27,7 +27,7 @@ function renderContact() {
                   LinkedIn
                 </div>
                 <div class="contact-card-value">
-                  work01sneha@gmail.com
+                  <a href="https://www.linkedin.com/in/sneha-garg-9924b3298/" target="_blank">Sneha Garg</a>
                 </div>
               </div>
             </div>

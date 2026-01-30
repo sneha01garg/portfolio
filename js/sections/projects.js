@@ -112,6 +112,7 @@ const projectsData = [
     thumbnail: './assets/my-works/cook-book/cookbook-magazine.png',
     column: 2,
     row: 2,
+
   },
   {
     id: 6,
@@ -138,9 +139,9 @@ const projectsData = [
   },
   {
     id: 7,
-    title: 'JUPITER',
-    tools: 'Illustrator',
-    type: 'Mobile App',
+    title: 'JUPITO',
+    tools: 'Illustrator, Figma',
+    type: 'Carousel',
     image: './assets/my-works/jupito-carousel/1.png',
     images: [
       './assets/my-works/jupito-carousel/1.png',
@@ -161,12 +162,13 @@ const projectsData = [
     thumbnail: './assets/my-works/jupito-carousel/jupito-mock.png',
     column: 3,
     row: 2,
+    imagesScroll: 'horizontal'
   },
   {
     id: 8,
     title: 'FIERY CHOW MAGIC',
     tools: 'Photoshop',
-    type: 'Food Marketing',
+    type: 'Marketing / Promotional Design',
     image: './assets/my-works/noodles/noodles.png',
     images: [
       './assets/my-works/noodles/noodles.png'
@@ -182,10 +184,11 @@ const projectsData = [
     thumbnail: './assets/my-works/noodles/noodles.png',
     column: 2,
     row: 2,
+
   },
   {
     id: 9,
-    title: 'SUNSCREEN EMAIL DESIGN',
+    title: 'EMAIL DESIGN',
     tools: 'Photoshop',
     type: 'Email Design',
     image: './assets/my-works/emaildesign/emaildesign.png',
@@ -205,6 +208,10 @@ const projectsData = [
     thumbnail: './assets/my-works/emaildesign/emaildesign.png',
     column: 2,
     row: 2,
+    imageStyles: {
+      margin: 'auto',
+    },
+
   }
 ];
 

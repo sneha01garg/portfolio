@@ -35,9 +35,9 @@ window.initHomeBackground = function () {
             }
 
             this.color = color;
-            // Faster initial velocity
-            this.vx = (Math.random() - 0.5) * 3.75;
-            this.vy = -Math.random() * 3.0 - 1.5; // Stronger upward start
+            // Initial velocity
+            this.vx = (Math.random() - 0.5) * 2.0;
+            this.vy = -Math.random() * 1.6 - 0.8; // Upward start
         }
 
         update() {
@@ -50,14 +50,14 @@ window.initHomeBackground = function () {
             }
 
             // Organic wandering movement + Buoyancy
-            this.vx += (Math.random() - 0.5) * 0.12;
-            this.vy += (Math.random() - 0.5) * 0.12;
-            this.vy -= 0.015; // Constant upward float
+            this.vx += (Math.random() - 0.5) * 0.064;
+            this.vy += (Math.random() - 0.5) * 0.064;
+            this.vy -= 0.008; // Constant upward float
 
             // Cap speed to maintain continuous flow
             const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-            const maxSpeed = 6.0; // Faster
-            const minSpeed = 2.25; // Faster minimum
+            const maxSpeed = 3.2;
+            const minSpeed = 1.2;
 
             if (speed > maxSpeed) {
                 this.vx = (this.vx / speed) * maxSpeed;
@@ -74,8 +74,8 @@ window.initHomeBackground = function () {
 
             if (dist < 400 && dist > 0) {
                 let angle = Math.atan2(dy, dx);
-                this.x += Math.cos(angle) * 4.5; // Stronger mouse repulse
-                this.y += Math.sin(angle) * 4.5;
+                this.x += Math.cos(angle) * 2.4; // Mouse repulse
+                this.y += Math.sin(angle) * 2.4;
             }
 
             this.x += this.vx;
@@ -89,7 +89,7 @@ window.initHomeBackground = function () {
             // Vertical recycle (Reset to bottom)
             if (this.y < -this.radius) {
                 this.y = canvas.height + this.targetRadius;
-                this.vy = -Math.random() * 3.0 - 1.5;
+                this.vy = -Math.random() * 1.6 - 0.8;
                 this.x = Math.random() * canvas.width;
                 this.radius = 0;
                 this.targetRadius = Math.random() * 150 + 150; // New reduced size
@@ -98,7 +98,7 @@ window.initHomeBackground = function () {
             // If wanders off bottom, recycle
             if (this.y > canvas.height + this.targetRadius + 200 && this.vy > 0) {
                 this.y = canvas.height + this.targetRadius;
-                this.vy = -Math.random() * 3.0 - 1.5;
+                this.vy = -Math.random() * 1.6 - 0.8;
                 this.x = Math.random() * canvas.width;
                 this.radius = 0;
                 this.targetRadius = Math.random() * 150 + 150; // New reduced size
