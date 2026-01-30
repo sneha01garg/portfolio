@@ -20,15 +20,24 @@ window.initHomeBackground = function () {
     }
 
     class Blob {
-        constructor(color) {
+        constructor(color, initial = false) {
             this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.targetRadius = Math.random() * 250 + 300;
-            this.radius = 0; // Start invisible
+            this.targetRadius = Math.random() * 150 + 150; // Reduced size
+
+            if (initial) {
+                this.y = Math.random() * canvas.height;
+                this.radius = this.targetRadius; // Start fully grown
+                this.opacity = 1; // Start fully visible
+            } else {
+                this.y = canvas.height + this.targetRadius;
+                this.radius = 0; // Start invisible
+                this.opacity = 0; // Start transparent
+            }
+
             this.color = color;
-            this.vx = (Math.random() - 0.5) * 0.3;
-            this.vy = (Math.random() - 0.5) * 0.3;
-            this.opacity = 0; // Start transparent
+            // Faster initial velocity
+            this.vx = (Math.random() - 0.5) * 3.75;
+            this.vy = -Math.random() * 3.0 - 1.5; // Stronger upward start
         }
 
         update() {
@@ -40,23 +49,60 @@ window.initHomeBackground = function () {
                 this.opacity += 0.01; // Smooth fade-in
             }
 
+            // Organic wandering movement + Buoyancy
+            this.vx += (Math.random() - 0.5) * 0.12;
+            this.vy += (Math.random() - 0.5) * 0.12;
+            this.vy -= 0.015; // Constant upward float
+
+            // Cap speed to maintain continuous flow
+            const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+            const maxSpeed = 6.0; // Faster
+            const minSpeed = 2.25; // Faster minimum
+
+            if (speed > maxSpeed) {
+                this.vx = (this.vx / speed) * maxSpeed;
+                this.vy = (this.vy / speed) * maxSpeed;
+            } else if (speed < minSpeed) {
+                const angle = Math.atan2(this.vy, this.vx) || -Math.PI / 2;
+                this.vx = Math.cos(angle) * minSpeed;
+                this.vy = Math.sin(angle) * minSpeed;
+            }
+
             let dx = this.x - mouse.x;
             let dy = this.y - mouse.y;
             let dist = Math.sqrt(dx * dx + dy * dy);
 
             if (dist < 400 && dist > 0) {
                 let angle = Math.atan2(dy, dx);
-                this.x += Math.cos(angle) * 0.8;
-                this.y += Math.sin(angle) * 0.8;
+                this.x += Math.cos(angle) * 4.5; // Stronger mouse repulse
+                this.y += Math.sin(angle) * 4.5;
             }
 
             this.x += this.vx;
             this.y += this.vy;
 
+            // Boundary checks
+            // Horizontal wrap
             if (this.x < -this.radius) this.x = canvas.width + this.radius;
             if (this.x > canvas.width + this.radius) this.x = -this.radius;
-            if (this.y < -this.radius) this.y = canvas.height + this.radius;
-            if (this.y > canvas.height + this.radius) this.y = -this.radius;
+
+            // Vertical recycle (Reset to bottom)
+            if (this.y < -this.radius) {
+                this.y = canvas.height + this.targetRadius;
+                this.vy = -Math.random() * 3.0 - 1.5;
+                this.x = Math.random() * canvas.width;
+                this.radius = 0;
+                this.targetRadius = Math.random() * 150 + 150; // New reduced size
+            }
+
+            // If wanders off bottom, recycle
+            if (this.y > canvas.height + this.targetRadius + 200 && this.vy > 0) {
+                this.y = canvas.height + this.targetRadius;
+                this.vy = -Math.random() * 3.0 - 1.5;
+                this.x = Math.random() * canvas.width;
+                this.radius = 0;
+                this.targetRadius = Math.random() * 150 + 150; // New reduced size
+            }
         }
 
         draw() {
@@ -80,9 +126,14 @@ window.initHomeBackground = function () {
     }
 
     function spawnBlobs() {
-        const count = Math.floor(Math.random() * 3) + 4;
+        const count = Math.floor(Math.random() * 5) + 15; // Increased slightly more
         for (let i = 0; i < count; i++) {
-            blobs.push(new Blob(colors[Math.floor(Math.random() * colors.length)]));
+            let b = new Blob(colors[Math.floor(Math.random() * colors.length)], true);
+            // Pre-warm: Simulate movement for initial blobs
+            for (let j = 0; j < 200; j++) {
+                b.update();
+            }
+            blobs.push(b);
         }
     }
 

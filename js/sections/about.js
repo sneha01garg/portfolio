@@ -15,10 +15,10 @@ function renderAbout() {
           <div class='about-me'>
             <div class='about-me-header'>
               <p data-parallax-speed="0.1">
-              Creative Mind,
+              Crafting Visual
               </p>
               <p data-parallax-speed="0.15">
-              Strategic Heart
+              Stories
               </p>
             </div>
             <div class='about-me-description'>

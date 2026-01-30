@@ -10,7 +10,7 @@ class ProjectModal extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['open', 'title', 'tools', 'type', 'image', 'description', 'images', 'project-overview', 'key-highlights'];
+        return ['open', 'title', 'tools', 'type', 'image', 'description', 'images', 'project-overview', 'key-highlights', 'thumbnail'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -49,6 +49,7 @@ class ProjectModal extends HTMLElement {
         this.setAttribute('tools', projectData.tools);
         this.setAttribute('type', projectData.type);
         this.setAttribute('image', projectData.image);
+        this.setAttribute('thumbnail', projectData.thumbnail || '');
         this.setAttribute('description', projectData.description);
         this.setAttribute('project-overview', projectData.projectOverview || '');
         // Serialize arrays to string
@@ -96,8 +97,17 @@ class ProjectModal extends HTMLElement {
         }
 
         // Separate main image (first) and others
-        const mainImage = images.length > 0 ? images[0] : image;
-        const otherImages = images.length > 1 ? images.slice(1) : [];
+        const thumbnail = this.getAttribute('thumbnail');
+        let mainImage;
+        let otherImages;
+
+        if (thumbnail) {
+            mainImage = thumbnail;
+            otherImages = images.filter(img => img !== thumbnail);
+        } else {
+            mainImage = images.length > 0 ? images[0] : image;
+            otherImages = images.length > 1 ? images.slice(1) : [];
+        }
 
         this.shadowRoot.innerHTML = `
             <style>
@@ -207,7 +217,6 @@ class ProjectModal extends HTMLElement {
 
                 .main-image {
                     width: 100%;
-                    border: 2px solid #0066cc;
                     margin-bottom: 30px;
                 }
 

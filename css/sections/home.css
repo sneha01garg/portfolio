@@ -50,10 +50,6 @@
   font-size: 25px;
   font: 'Montserrat';
   color: white;
+  margin-top: -30px;
   /* Ensure text is visible on dark background */
-}
-
-#home-section p {
-  font-size: 25px;
-  font: 'Montserrat';
 }
