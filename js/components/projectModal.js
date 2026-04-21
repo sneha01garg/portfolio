@@ -10,7 +10,7 @@ class ProjectModal extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['open', 'title', 'tools', 'type', 'image', 'description', 'images', 'project-overview', 'key-highlights', 'thumbnail', 'images-scroll', 'image-styles'];
+        return ['open', 'title', 'tools', 'type', 'image', 'description', 'images', 'project-overview', 'key-highlights', 'thumbnail', 'images-scroll', 'image-styles', 'sections'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -79,6 +79,9 @@ class ProjectModal extends HTMLElement {
         const imageStyles = projectData.imageStyles ? JSON.stringify(projectData.imageStyles) : '{}';
         this.setAttribute('image-styles', imageStyles);
 
+        const sections = projectData.sections ? JSON.stringify(projectData.sections) : '[]';
+        this.setAttribute('sections', sections);
+
         document.body.style.overflow = 'hidden';
     }
 
@@ -119,6 +122,14 @@ class ProjectModal extends HTMLElement {
             images = JSON.parse(imagesStr);
         } catch (e) {
             images = [];
+        }
+
+        const sectionsStr = this.getAttribute('sections') || '[]';
+        let sections = [];
+        try {
+            sections = JSON.parse(sectionsStr);
+        } catch (e) {
+            sections = [];
         }
 
         // If no images array but we have a main image, stick it in
@@ -248,10 +259,14 @@ class ProjectModal extends HTMLElement {
                 .main-image {
                     width: 100%;
                     margin-bottom: 30px;
+                    display: flex;
+                    justify-content: center;
                 }
 
                 .main-image img {
-                    width: 100%;
+                    max-width: 100%;
+                    max-height: 75vh;
+                    width: auto;
                     height: auto;
                     display: block;
                 }
@@ -420,10 +435,80 @@ class ProjectModal extends HTMLElement {
                     padding-left: 20px;
                     color: #ccc;
                 }
-                
+
                 .highlights-list li {
                     margin-bottom: 8px;
                     line-height: 1.6;
+                }
+
+                .screen-sections {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 70px;
+                    margin-top: 40px;
+                }
+
+                .screen-section {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 24px;
+                }
+
+                .screen-section .section-images {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                }
+
+                .screen-section .section-images img {
+                    max-width: 100%;
+                    max-height: 520px;
+                    width: auto;
+                    height: auto;
+                    display: block;
+                    flex: 0 1 auto;
+                    min-width: 0;
+                }
+
+                .screen-section .section-text {
+                    max-width: 800px;
+                }
+
+                .screen-section .section-heading {
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: #fff;
+                    margin: 0;
+                    letter-spacing: 1px;
+                }
+
+                .screen-section p {
+                    font-size: 16px;
+                    line-height: 1.8;
+                    color: #ccc;
+                    white-space: pre-line;
+                    margin: 0;
+                }
+
+                @media (max-width: 768px) {
+                    .screen-sections {
+                        gap: 50px;
+                        margin-top: 30px;
+                    }
+
+                    .screen-section {
+                        gap: 16px;
+                    }
+
+                    .screen-section .section-images img {
+                        max-height: 400px;
+                    }
+
+                    .screen-section .section-heading {
+                        font-size: 20px;
+                    }
                 }
             </style>
 
@@ -451,13 +536,13 @@ class ProjectModal extends HTMLElement {
                                 <img src="${mainImage}" alt="${title}" style="${this.styleMapToString(customImageStyles)}">
                             </div>
                         ` : ''}
-                        
+
                         <div class="description">
                             <div class="description-column">
                                 <span class="section-title">Project Overview-</span>
                                 <p>${projectOverview}</p>
                             </div>
-                            
+
                             ${keyHighlights.length > 0 ? `
                             <div class="description-column">
                                 <span class="section-title">Key Highlights-</span>
@@ -468,10 +553,38 @@ class ProjectModal extends HTMLElement {
                             ` : ''}
                         </div>
 
-                        ${otherImages.length > 0 ? `
+                        ${sections.length > 0 ? `
+                            <div class="screen-sections">
+                                ${sections.map(section => {
+                                    const sectionImgs = Array.isArray(section.images)
+                                        ? section.images
+                                        : (section.image ? [section.image] : []);
+                                    return `
+                                    <div class="screen-section">
+                                        ${section.title ? `<h3 class="section-heading">${section.title}</h3>` : ''}
+                                        ${sectionImgs.length > 0 ? `
+                                            <div class="section-images">
+                                                ${sectionImgs.map(img => `
+                                                    <img src="${img}" alt="${section.title || ''}">
+                                                `).join('')}
+                                            </div>
+                                        ` : ''}
+                                        <div class="section-text">
+                                            ${section.items && section.items.length > 0 ? `
+                                                <ul class="highlights-list">
+                                                    ${section.items.map(item => `<li>${item}</li>`).join('')}
+                                                </ul>
+                                            ` : ''}
+                                            ${section.text ? `<p>${section.text}</p>` : ''}
+                                        </div>
+                                    </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        ` : otherImages.length > 0 ? `
                             <div class="scroll-container ${imagesScroll === 'horizontal' ? 'horizontal' : ''}">
                                 ${imagesScroll === 'horizontal' ? '<button class="scroll-btn left">‹</button>' : ''}
-                                
+
                                 <div class="secondary-images ${imagesScroll === 'horizontal' ? 'horizontal nudge-anim' : ''}">
                                     ${otherImages.map(img => `
                                         <div class="secondary-image">
@@ -479,7 +592,7 @@ class ProjectModal extends HTMLElement {
                                         </div>
                                     `).join('')}
                                 </div>
-                                
+
                                 ${imagesScroll === 'horizontal' ? '<button class="scroll-btn right">›</button>' : ''}
                             </div>
                         ` : ''}

@@ -212,6 +212,68 @@ const projectsData = [
       margin: 'auto',
     },
 
+  },
+  {
+    id: 10,
+    title: 'TASK MANAGEMENT APP',
+    tools: 'Figma',
+    type: 'App Design',
+    image: './assets/my-works/task-managemnet-app/task-app.png',
+    thumbnail: './assets/my-works/task-managemnet-app/task-app.png',
+    column: 3,
+    row: 2,
+    projectOverview: 'Designed a task management platform to help teams organize, assign, and track work efficiently. Focused on improving visibility, accountability, and structured workflows through role-based interactions.',
+    keyHighlights: [
+      'Designed role-based task flows (delegator & delegatee)',
+      'Created clear task hierarchy with subtasks and priorities',
+      'Focused on quick task creation and minimal friction',
+      'Enabled team visibility through dashboard insights',
+      'Balanced simplicity with advanced features like recurrence and attachments'
+    ],
+    sections: [
+      {
+        title: 'Dashboard',
+        images: [
+          './assets/my-works/task-managemnet-app/dashboard/dashboard1.png',
+          './assets/my-works/task-managemnet-app/dashboard/dashboard2.png'
+        ],
+        text: 'The dashboard acts as the central hub, giving users a quick overview of tasks, priorities, and team activity.\nIt highlights key elements like daily tasks, notifications, and task distribution, helping users quickly understand what needs attention.\nThe scrollable view introduces additional layers such as calendar integration, team insights, and recent notes, enabling users to move from planning to execution seamlessly.'
+      },
+      {
+        title: 'Task Section',
+        images: [
+          './assets/my-works/task-managemnet-app/tasks/all-tasks1.png',
+          './assets/my-works/task-managemnet-app/tasks/all-task2.png',
+          './assets/my-works/task-managemnet-app/tasks/all-task3.png',
+          './assets/my-works/task-managemnet-app/tasks/add-a-task.png'
+        ],
+        text: 'The task section is the core of the platform, allowing users to create, manage, and track tasks with clarity.\nUsers can switch between views like All Tasks, My Tasks, and Assigned by Me, making it easy to understand ownership and responsibility.\nEach task displays key details such as priority, due date, status, and assigned members, ensuring quick scanning and decision-making.\nThe task creation flow supports flexible inputs including subtasks, recurrence, attachments, and parent-child relationships, enabling structured task management.'
+      },
+      {
+        title: 'Reports',
+        images: [
+          './assets/my-works/task-managemnet-app/reports/report1.png',
+          './assets/my-works/task-managemnet-app/reports/reports.png'
+        ],
+        text: 'The reports section provides insights into task performance and team productivity.\nUsers can switch between personal and team views to analyze metrics such as completion rate, overdue tasks, efficiency score, and task distribution.\nVisual elements like charts and progress indicators make it easier to identify trends, measure performance, and support better decision-making.'
+      },
+      {
+        title: 'Notes Section',
+        images: [
+          './assets/my-works/task-managemnet-app/notes/notes1.png',
+          './assets/my-works/task-managemnet-app/notes/note-2.png',
+          './assets/my-works/task-managemnet-app/notes/note3.png'
+        ],
+        text: 'The notes section allows users to quickly capture ideas, meeting points, and important information.\nNotes are displayed in a simple card layout for easy access and organization.\nUsers can create new notes or directly convert notes into tasks, bridging the gap between planning and execution.\nThis ensures that no important idea is lost and can be seamlessly turned into actionable work.'
+      },
+      {
+        title: 'Team Section',
+        images: [
+          './assets/my-works/task-managemnet-app/team/team1.png'
+        ],
+        text: 'The team section provides a clear view of all team members along with their roles and responsibilities.\nUsers can assign tasks directly from this screen, making delegation faster and more efficient.\nRole-based visibility (such as admin, delegator, and delegatee) ensures structured collaboration and clear accountability across the team.'
+      }
+    ]
   }
 ];
 
