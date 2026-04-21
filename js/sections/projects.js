@@ -205,7 +205,7 @@ const projectsData = [
       'Balanced content, spacing, and layout for better user experience across devices',
       'Focused on conversion-oriented design for email marketing campaigns ',
     ],
-    thumbnail: './assets/my-works/emaildesign/emaildesign.png',
+    thumbnail: './assets/my-works/emaildesign/emaildesignthumnail.png',
     column: 2,
     row: 2,
     imageStyles: {
