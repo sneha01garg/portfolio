@@ -10,7 +10,7 @@ function renderAbout() {
             </vertical-fade-text>           
           </div>
           <div class='my-image'>
-            <img src='./assets/my-works/aboutme/my-image.png' data-parallax-speed="-0.1">
+            <img src='./assets/my-works/aboutme/my-image.png' data-parallax-speed="-0.1" loading="lazy" decoding="async" alt="About me">
           </div>
           <div class='about-me'>
             <div class='about-me-header'>
@@ -30,10 +30,10 @@ function renderAbout() {
               <span>Design Toolkit :</span>
             </div>
               <div class='tools-row'>
-                <img src='./assets/my-works/aboutme/Figma.svg' alt='Figma'>
-                <img src='./assets/my-works/aboutme/Adobe_Photoshop_CC_icon.svg.png' alt='Photoshop'>
-                <img src='./assets/my-works/aboutme/Adobe_Illustrator_CC_icon.svg.png' alt='Illustrator'>
-                <img src='./assets/my-works/aboutme/Adobe_InDesign_CC_icon.svg.png' alt='InDesign'>
+                <img src='./assets/my-works/aboutme/Figma.svg' alt='Figma' loading="lazy" decoding="async">
+                <img src='./assets/my-works/aboutme/Adobe_Photoshop_CC_icon.svg.png' alt='Photoshop' loading="lazy" decoding="async">
+                <img src='./assets/my-works/aboutme/Adobe_Illustrator_CC_icon.svg.png' alt='Illustrator' loading="lazy" decoding="async">
+                <img src='./assets/my-works/aboutme/Adobe_InDesign_CC_icon.svg.png' alt='InDesign' loading="lazy" decoding="async">
               </div>
             </div>
           </div>

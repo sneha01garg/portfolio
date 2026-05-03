@@ -696,7 +696,7 @@ class ProjectModal extends HTMLElement {
                     <div class="modal-body">
                         ${mainImage ? `
                             <div class="main-image">
-                                <img src="${mainImage}" alt="${title}" style="${this.styleMapToString(customImageStyles)}">
+                                <img src="${mainImage}" alt="${title}" loading="lazy" decoding="async" style="${this.styleMapToString(customImageStyles)}">
                             </div>
                         ` : ''}
 
@@ -728,7 +728,7 @@ class ProjectModal extends HTMLElement {
                                         ${sectionImgs.length > 0 ? `
                                             <div class="section-images">
                                                 ${sectionImgs.map(img => `
-                                                    <img src="${img}" alt="${section.title || ''}">
+                                                    <img src="${img}" alt="${section.title || ''}" loading="lazy" decoding="async">
                                                 `).join('')}
                                             </div>
                                         ` : ''}
@@ -751,7 +751,7 @@ class ProjectModal extends HTMLElement {
                                 <div class="secondary-images ${imagesScroll === 'horizontal' ? 'horizontal nudge-anim' : ''}">
                                     ${otherImages.map(img => `
                                         <div class="secondary-image">
-                                            <img src="${img}" alt="${title} view" style="${this.styleMapToString(customImageStyles)}">
+                                            <img src="${img}" alt="${title} view" loading="lazy" decoding="async" style="${this.styleMapToString(customImageStyles)}">
                                         </div>
                                     `).join('')}
                                 </div>

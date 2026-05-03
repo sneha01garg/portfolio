@@ -294,11 +294,11 @@ function renderProjects() {
       <h1 data-parallax-speed="0.1">My Works</h1>
       <div class="projects-grid">
         ${projectsData.slice(0, 2).map(project => `
-          <div class="project-card" 
-               onclick="openProjectModal(${project.id})" 
+          <div class="project-card"
+               onclick="openProjectModal(${project.id})"
                style="grid-column: span ${project.column}; grid-row: span ${project.row};">
             <div class="project-image">
-              <img src="${project.thumbnail}" alt="${project.title}">
+              <img src="${project.thumbnail}" alt="${project.title}" loading="lazy" decoding="async">
               <div class="project-overlay">
                 <h3>${project.title}</h3>
                 <p class="project-tools">• ${project.tools}</p>
@@ -306,7 +306,7 @@ function renderProjects() {
             </div>
           </div>
         `).join('')}
-        
+
         <div class="vertical-text-item">
           <vertical-fade-text
             side="right"
@@ -317,11 +317,11 @@ function renderProjects() {
         </div>
         
         ${projectsData.slice(2).map(project => `
-          <div class="project-card" 
-               onclick="openProjectModal(${project.id})" 
+          <div class="project-card"
+               onclick="openProjectModal(${project.id})"
                style="grid-column: span ${project.column}; grid-row: span ${project.row};">
             <div class="project-image">
-              <img src="${project.thumbnail}" alt="${project.title}">
+              <img src="${project.thumbnail}" alt="${project.title}" loading="lazy" decoding="async">
               <div class="project-overlay">
                 <h3>${project.title}</h3>
                 <p class="project-tools">• ${project.tools}</p>
