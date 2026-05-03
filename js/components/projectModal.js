@@ -2,11 +2,59 @@ class ProjectModal extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+        this._handleEscKey = this._handleEscKey.bind(this);
+        this._handlePopstate = this._handlePopstate.bind(this);
     }
 
     connectedCallback() {
         this.render();
         this.setupEventListeners();
+        document.addEventListener('keydown', this._handleEscKey);
+        window.addEventListener('popstate', this._handlePopstate);
+    }
+
+    disconnectedCallback() {
+        document.removeEventListener('keydown', this._handleEscKey);
+        window.removeEventListener('popstate', this._handlePopstate);
+    }
+
+    _handlePopstate() {
+        const lightbox = this.shadowRoot.querySelector('.image-lightbox');
+        const lightboxOpen = lightbox && lightbox.getAttribute('data-open') === 'true';
+        const stateHasLightbox = history.state && history.state.lightbox === true;
+        if (lightboxOpen && !stateHasLightbox) {
+            lightbox.setAttribute('data-open', 'false');
+            return;
+        }
+
+        const modalOpen = this.getAttribute('open') === 'true';
+        const stateHasModal = history.state && history.state.modal === true;
+        if (modalOpen && !stateHasModal) {
+            this._performClose();
+        }
+    }
+
+    _performClose() {
+        this.setAttribute('open', 'false');
+        document.body.style.overflow = '';
+        const lightbox = this.shadowRoot.querySelector('.image-lightbox');
+        if (lightbox) lightbox.setAttribute('data-open', 'false');
+    }
+
+    _handleEscKey(e) {
+        if (e.key !== 'Escape') return;
+        if (this.getAttribute('open') !== 'true') return;
+
+        const lightbox = this.shadowRoot.querySelector('.image-lightbox');
+        if (lightbox && lightbox.getAttribute('data-open') === 'true') {
+            if (history.state && history.state.lightbox) {
+                history.back();
+            } else {
+                lightbox.setAttribute('data-open', 'false');
+            }
+            return;
+        }
+        this.close();
     }
 
     static get observedAttributes() {
@@ -50,15 +98,50 @@ class ProjectModal extends HTMLElement {
             });
         }
 
-        // ESC key to close
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.getAttribute('open') === 'true') {
-                this.close();
+        // Lightbox: open on image click, close on backdrop click
+        const modalBody = this.shadowRoot.querySelector('.modal-body');
+        const lightbox = this.shadowRoot.querySelector('.image-lightbox');
+        const lightboxImg = this.shadowRoot.querySelector('.lightbox-img');
+        const lightboxCloseBtn = this.shadowRoot.querySelector('.lightbox-close');
+
+        const closeLightbox = () => {
+            if (history.state && history.state.lightbox) {
+                history.back();
+            } else if (lightbox) {
+                lightbox.setAttribute('data-open', 'false');
             }
-        });
+        };
+
+        if (modalBody && lightbox && lightboxImg) {
+            modalBody.addEventListener('click', (e) => {
+                if (e.target.tagName === 'IMG') {
+                    const wasOpen = lightbox.getAttribute('data-open') === 'true';
+                    lightboxImg.src = e.target.src;
+                    lightboxImg.alt = e.target.alt || '';
+                    lightbox.setAttribute('data-open', 'true');
+                    if (!wasOpen) {
+                        history.pushState({ ...(history.state || {}), lightbox: true }, '');
+                    }
+                }
+            });
+        }
+
+        if (lightbox) {
+            lightbox.addEventListener('click', () => {
+                closeLightbox();
+            });
+        }
+
+        if (lightboxCloseBtn) {
+            lightboxCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeLightbox();
+            });
+        }
     }
 
     open(projectData) {
+        const wasOpen = this.getAttribute('open') === 'true';
         this.setAttribute('open', 'true');
         this.setAttribute('title', projectData.title);
         this.setAttribute('tools', projectData.tools);
@@ -83,11 +166,19 @@ class ProjectModal extends HTMLElement {
         this.setAttribute('sections', sections);
 
         document.body.style.overflow = 'hidden';
+
+        if (!wasOpen) {
+            history.pushState({ ...(history.state || {}), modal: true }, '');
+        }
     }
 
     close() {
-        this.setAttribute('open', 'false');
-        document.body.style.overflow = '';
+        if (this.getAttribute('open') !== 'true') return;
+        if (history.state && history.state.modal) {
+            history.back();
+        } else {
+            this._performClose();
+        }
     }
 
     render() {
@@ -510,6 +601,78 @@ class ProjectModal extends HTMLElement {
                         font-size: 20px;
                     }
                 }
+
+                .modal-body img {
+                    cursor: zoom-in;
+                }
+
+                .image-lightbox {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    background: rgba(0, 0, 0, 0.95);
+                    z-index: 20000;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 40px;
+                    cursor: zoom-out;
+                }
+
+                .image-lightbox[data-open="true"] {
+                    display: flex;
+                }
+
+                .lightbox-img {
+                    max-width: 95vw;
+                    max-height: 95vh;
+                    width: auto;
+                    height: auto;
+                    object-fit: contain;
+                    display: block;
+                }
+
+                .lightbox-close {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(0, 0, 0, 0.5);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                    color: #fff;
+                    font-size: 28px;
+                    cursor: pointer;
+                    z-index: 20001;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: background 0.2s, border-color 0.2s;
+                    padding: 0;
+                    line-height: 1;
+                }
+
+                .lightbox-close:hover {
+                    background: rgba(255, 255, 255, 0.15);
+                    border-color: #fff;
+                }
+
+                @media (max-width: 768px) {
+                    .image-lightbox {
+                        padding: 20px;
+                    }
+
+                    .lightbox-close {
+                        top: 12px;
+                        right: 12px;
+                        width: 42px;
+                        height: 42px;
+                        font-size: 24px;
+                    }
+                }
             </style>
 
             <div class="modal-backdrop">
@@ -598,6 +761,11 @@ class ProjectModal extends HTMLElement {
                         ` : ''}
                     </div>
                 </div>
+            </div>
+
+            <div class="image-lightbox" data-open="false">
+                <button class="lightbox-close" type="button" aria-label="Close image">×</button>
+                <img class="lightbox-img" src="" alt="">
             </div>
         `;
 

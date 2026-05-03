@@ -3,6 +3,7 @@ class NavBar extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.mobileMenuOpen = false;
+    this._handlePopstate = this._handlePopstate.bind(this);
   }
 
   connectedCallback() {
@@ -10,11 +11,44 @@ class NavBar extends HTMLElement {
     this.setupListeners();
     window.addEventListener('scroll', this.handleScroll.bind(this));
     window.addEventListener('resize', this.handleResize.bind(this));
+    window.addEventListener('popstate', this._handlePopstate);
+    this._initHistoryState();
   }
 
   disconnectedCallback() {
     window.removeEventListener('scroll', this.handleScroll.bind(this));
     window.removeEventListener('resize', this.handleResize.bind(this));
+    window.removeEventListener('popstate', this._handlePopstate);
+  }
+
+  _initHistoryState() {
+    if (!history.state || !history.state.section) {
+      const initialHash = window.location.hash.replace('#', '');
+      const initialSection = initialHash || 'home-section';
+      history.replaceState({ section: initialSection }, '', `#${initialSection}`);
+      if (initialHash) {
+        requestAnimationFrame(() => {
+          this.scrollToSection(initialSection);
+          this.setActive(initialSection);
+        });
+      }
+    }
+  }
+
+  _handlePopstate(e) {
+    const sectionId = e.state && e.state.section;
+    if (sectionId) {
+      this.scrollToSection(sectionId);
+      this.setActive(sectionId);
+    }
+  }
+
+  navigateToSection(sectionId) {
+    if (!history.state || history.state.section !== sectionId) {
+      history.pushState({ section: sectionId }, '', `#${sectionId}`);
+    }
+    this.scrollToSection(sectionId);
+    this.setActive(sectionId);
   }
 
   handleScroll() {
@@ -55,8 +89,7 @@ class NavBar extends HTMLElement {
     this.shadowRoot.addEventListener('click', (e) => {
       if (e.target.classList.contains('nav-link')) {
         const sectionId = e.target.dataset.section;
-        this.scrollToSection(sectionId);
-        this.setActive(sectionId);
+        this.navigateToSection(sectionId);
 
         // Close mobile menu after clicking a link
         if (this.mobileMenuOpen) {
