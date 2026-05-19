@@ -115,27 +115,91 @@ const projectsData = [
 
   },
   {
-    id: 6,
-    title: 'MIND EASE',
+    id: 11,
+    title: 'TASK MANAGEMENT APP',
     tools: 'Figma',
-    type: 'Web Design',
-    image: './assets/my-works/mental-health-app/mental-health-1.png',
-    images: [
-      './assets/my-works/mental-health-app/mental-health-1.png',
-      './assets/my-works/mental-health-app/mindease1.avif',
-      './assets/my-works/mental-health-app/mindease2.avif',
-    ],
-    projectOverview: 'This is an ongoing UI/UX concept project exploring how design can support mental wellness through structured journaling. The goal was to make users feel safe, supported, and motivated to reflect.',
-    keyHighlights: [
-      'Guided journaling pages',
-      'Mood check-ins',
-      'Calendar-based tracking',
-      'Reminder overlays',
-      'Soothing color scheme and illustration',
-    ],
-    thumbnail: './assets/my-works/mental-health-app/mental-health-1.png',
+    type: 'UX Case Study · Mobile App',
+    image: './assets/my-works/indusole/add-task-two-phone.png',
+    thumbnail: './assets/my-works/task-managemnet-app/task-app.png',
     column: 3,
     row: 2,
+    projectOverview: 'Designed the Task Management module of Indesol Global\'s multi-module business app. Sole product designer, end-to-end. The same shell hosts Finance, ERP, and other tools. Users switch between them via an All Apps button. I designed the full Task module across every user role, from splash and onboarding through to reports. This case study focuses on one design thread that runs through the product, the one I think is the most interesting to talk about. The full design covers a lot more than what\'s described here.',
+    keyHighlights: [
+      'My role: Sole product designer, end-to-end',
+      'Client: Indesol Global',
+      'Platform: Mobile',
+      'Principle throughout: inform the user, never impose on them'
+    ],
+    sections: [
+      {
+        title: 'What the app is',
+        text: 'A team task management tool for the workplace. There are three roles:\n\n· Admin: manages users and policies\n· Delegator: creates tasks and assigns them (down to Delegatees, sideways to other Delegators, or to themselves)\n· Delegatee: receives and executes tasks; cannot reassign\n\nI designed screens for all three roles: Admin, Delegator, and Delegatee. This case study focuses on the Delegator because they\'re the only role that both sends and receives tasks, which means their queue gets crowded fastest, and they benefit most from the design decisions described below.'
+      },
+      {
+        title: 'The problem I wanted to solve',
+        text: 'While designing the app, one thing kept bothering me about how task management tools usually handle priority. Most apps let users set a priority (High, Medium, Low) when creating a task. It looks clean on paper. In practice, it falls apart.\n\nEverything ends up tagged High. Senders inflate priority because they want their own task done first. The priority flag stops being a signal; it becomes noise.\n\nEven when priority is set honestly, it isn\'t enough on its own. A High-priority task due in five days isn\'t more urgent than a Medium-priority task due in two hours. A High-priority parent task with five open subtasks behind it is a different shape of work than a standalone one. Static priority tags can\'t capture that context.\n\nAnd the sender, the Delegator, has no way of knowing whether the person they\'re about to assign to is already drowning. They just keep adding. So the design challenge inside the broader task-management brief became: how do we help users finish their work, given that priority alone won\'t tell them what to finish first?\n\nThat question shaped three pieces of the design.'
+      },
+      {
+        title: 'Three pieces of the design',
+        text: 'These three pieces work together. None of them blocks the user, none of them adds a new mode to learn; they just surface information at the moments it actually helps.'
+      },
+      {
+        title: '1 · A contextual alert when the queue gets heavy',
+        images: ['./assets/my-works/indusole/contextual-alert.png'],
+        text: 'When a user\'s active task count crosses a threshold, a small amber alert appears with the workload status and a single action: Smart Sort.\n\nThe alert is system-wide. It can appear on the Dashboard, the Tasks screen, or anywhere the user is when the threshold trips. It\'s dismissible. The wording is deliberately neutral: "your workload is high today", not "you\'re overloaded."\n\nThe action is one button. Tapping Smart Sort takes the user to the Tasks screen with the Smart Sort toggle already on, list re-ranked, ready to go.'
+      },
+      {
+        title: '2 · Smart Sort, a toggle on the Tasks screen',
+        images: ['./assets/my-works/indusole/tasks-smart-sort.png'],
+        text: 'Smart Sort lives on the Tasks screen as a simple switch with the subtitle "Smart ranking by urgency and deadline."\n\nWhen the user turns it on, the task list re-ranks itself using a combination of signals rather than just one:\n\n· The priority that was set when the task was created\n· The due date\n· Whether the task is a parent with open subtasks\n· When the task was assigned\n\nThe reason for combining signals is the reason this feature exists. Priority tags alone are unreliable. So the system looks at more than just what the sender said. The toggle takes a list that looks like everything is equally urgent and turns it into one where the actual most-important thing sits at the top.\n\nThe user experience is just a switch. The logic sits inside.'
+      },
+      {
+        title: '3 · Workload-aware Assignee, protecting the receiver',
+        images: ['./assets/my-works/indusole/add-task-two-phone.png'],
+        text: 'When the Delegator goes to assign a task, the assignee picker shows each person\'s current load: Active Queue or Heavy Queue.\n\nIf they pick someone with a Heavy Queue, an inline message appears:\n\n"Harsh has 7 active tasks, 2 overdue. Continue assigning, or pick someone with more capacity?"\n\nIt never blocks the assignment. The Delegator might have a perfectly good reason: the task is critical, the person is the only one qualified. The design respects that. It just makes sure the decision is informed.\n\nThis is the single moment in the product where workload awareness actively interrupts a flow. Everywhere else the app stays out of the way.'
+      },
+      {
+        title: 'The thread connecting all three',
+        text: 'The same idea runs through every piece: inform, don\'t impose.\n\nThe user keeps control at every step. The alert is dismissible. Smart Sort can be turned off. The assignee warning can be ignored. None of them trap the user in a mode or force a decision.',
+        comparison: [
+          { common: 'Show a workload score ("you\'re 80% loaded")', thisApp: 'Show a count and a single action ("7 active, 2 overdue. Smart Sort?")' },
+          { common: 'Force the user into a focus mode', thisApp: 'One toggle, off by default, always escapable' },
+          { common: 'Block the user from assigning to a busy teammate', thisApp: 'Inform the assigner, let them decide' },
+          { common: 'Make the user filter and sort manually every time', thisApp: 'One toggle, the system handles the ranking' },
+          { common: 'Treat priority tags as the source of truth', thisApp: 'Treat them as one signal among several' }
+        ]
+      },
+      {
+        title: 'The screens',
+        text: 'The full design covers Dashboard, Tasks, Task Details, Add Task, Notes, Team, and Reports (Personal and Team Overview), plus the supporting Priority Assistance and Smart Sort Active flows.',
+        screens: [
+          { image: './assets/my-works/indusole/dashboard-annotated.png', caption: 'Dashboard: Calendar, Due Today, Task Summary, Team Snapshot. The information surface for the Delegator role.', tags: ['dashboard', 'calendar', 'due today', 'task summary', 'team snapshot'] },
+          { image: './assets/my-works/indusole/tasks-annotated.png', caption: 'Tasks: Segmentation toggle (All / My Tasks / Assigned by me) and consolidated Filters dropdown.', tags: ['tasks', 'all tasks', 'my tasks', 'assigned by me', 'filters'] },
+          { image: './assets/my-works/indusole/tasks-smart-sort.png', caption: 'Smart Sort active: task list re-ranked by urgency and deadline. Top priorities surface automatically.', tags: ['tasks', 'smart sort', 'top priority', 'up next', 'overdue'] },
+          { image: './assets/my-works/indusole/add-task-annotated.png', caption: 'Add Task: flexible form with priority, recurrence, assignee workload awareness, and parent task linking.', tags: ['add task', 'priority', 'recurrence', 'assignee', 'parent task'] },
+          { image: './assets/my-works/indusole/task-details-annotated.png', caption: 'Task Details: centralised view of a single task, designed to reduce context-switching during execution.', tags: ['task details', 'metadata', 'priority', 'attachments', 'subtasks'] },
+          { image: './assets/my-works/indusole/notes-list-annotated.png', caption: 'Notes: quick-capture list with timestamp indexing and one-tap creation.', tags: ['notes', 'quick capture', 'list view', 'search'] },
+          { image: './assets/my-works/indusole/note-editor-annotated.png', caption: 'Note editor: auto timestamp, floating toolbar (formatting, markup, attachments, undo/redo). Saving is one tap.', tags: ['note editor', 'auto timestamp', 'floating toolbar', 'save'] },
+          { image: './assets/my-works/indusole/team-annotated.png', caption: 'Team: workload indicators per member, Pending and Overdue counts, Quick Assign on each row.', tags: ['team', 'workload', 'pending', 'overdue', 'assign task'] },
+          { image: './assets/my-works/indusole/reports-personal-annotated.png', caption: 'Reports (Personal): productivity score, completion trends, category distribution.', tags: ['reports', 'productivity score', 'completion trend', 'category distribution'] },
+          { image: './assets/my-works/indusole/reports-team-annotated.png', caption: 'Reports (Team): per-member breakdown, top contributors, team-wide trends.', tags: ['reports', 'team overview', 'top contributors', 'team metrics'] }
+        ]
+      },
+
+      {
+        title: 'Reflection',
+        items: [
+          '<strong>The threshold for the alert is a guess.</strong> When exactly should the contextual alert appear: 5 active tasks? 7? 1 overdue? 2? The current design picks a reasonable number. The right answer is something only real usage data can give you.',
+          '<strong>The assignee warning adds friction by design.</strong> It\'s the one place in the product where the user has to make an extra decision they didn\'t have to before. The bet is that the visibility is worth it. Whether it actually changes assignment behaviour is the kind of thing worth testing once the app is in use.',
+          '<strong>The signals feed into one ranking.</strong> I identified four signals that should influence Smart Sort: priority, due date, subtasks, and assignment age. How they\'re weighted relative to each other is a question for engineering and usage data, not something I tried to solve at the design layer.',
+          '<strong>What I\'m taking from this project.</strong> The design got quieter over time. Earlier versions had a persistent banner, a separate Focus Mode, a dedicated triage screen. I pulled most of that out. The final version is much simpler than where I started. The discipline I\'m carrying forward is that the absence of UI is also a design decision.'
+        ]
+      },
+      {
+        title: 'End notes',
+        text: 'The Task module is one of several in the Indesol Global platform. Finance, ERP, and other modules share the same shell.'
+      }
+    ]
   },
   {
     id: 7,
@@ -154,7 +218,7 @@ const projectsData = [
     projectOverview: 'Designed a concept-driven social media carousel for Jupito, focused on creating an emotionally safe and judgment-free space for people to express their thoughts.',
     keyHighlights: [
       'Developed the concept around the insight that people rehearse difficult conversations internally before sharing them',
-      'Used simple illustrated characters and thread metaphors to represent tangled thoughts and emotional overwhelm',
+      'Hand-doodled simple illustrated characters and thread metaphors to represent tangled thoughts and emotional overwhelm',
       'Designed a visual narrative across multiple slides, moving from confusion to clarity',
       'Maintained a warm, minimal color palette to evoke calm and emotional safety',
       'Balanced copy and visuals to keep the tone gentle, non-preachy, and approachable',
@@ -214,66 +278,27 @@ const projectsData = [
 
   },
   {
-    id: 10,
-    title: 'TASK MANAGEMENT APP',
+    id: 6,
+    title: 'MIND EASE',
     tools: 'Figma',
-    type: 'App Design',
-    image: './assets/my-works/task-managemnet-app/task-app.png',
-    thumbnail: './assets/my-works/task-managemnet-app/task-app.png',
+    type: 'Web Design',
+    image: './assets/my-works/mental-health-app/mental-health-1.png',
+    images: [
+      './assets/my-works/mental-health-app/mental-health-1.png',
+      './assets/my-works/mental-health-app/mindease1.avif',
+      './assets/my-works/mental-health-app/mindease2.avif',
+    ],
+    projectOverview: 'This is an ongoing UI/UX concept project exploring how design can support mental wellness through structured journaling. The goal was to make users feel safe, supported, and motivated to reflect.',
+    keyHighlights: [
+      'Guided journaling pages',
+      'Mood check-ins',
+      'Calendar-based tracking',
+      'Reminder overlays',
+      'Soothing color scheme and illustration',
+    ],
+    thumbnail: './assets/my-works/mental-health-app/mental-health-1.png',
     column: 3,
     row: 2,
-    projectOverview: 'Designed a task management platform to help teams organize, assign, and track work efficiently. Focused on improving visibility, accountability, and structured workflows through role-based interactions.',
-    keyHighlights: [
-      'Designed role-based task flows (delegator & delegatee)',
-      'Created clear task hierarchy with subtasks and priorities',
-      'Focused on quick task creation and minimal friction',
-      'Enabled team visibility through dashboard insights',
-      'Balanced simplicity with advanced features like recurrence and attachments'
-    ],
-    sections: [
-      {
-        title: 'Dashboard',
-        images: [
-          './assets/my-works/task-managemnet-app/dashboard/dashboard1.png',
-          './assets/my-works/task-managemnet-app/dashboard/dashboard2.png'
-        ],
-        text: 'The dashboard acts as the central hub, giving users a quick overview of tasks, priorities, and team activity.\nIt highlights key elements like daily tasks, notifications, and task distribution, helping users quickly understand what needs attention.\nThe scrollable view introduces additional layers such as calendar integration, team insights, and recent notes, enabling users to move from planning to execution seamlessly.'
-      },
-      {
-        title: 'Task Section',
-        images: [
-          './assets/my-works/task-managemnet-app/tasks/all-tasks1.png',
-          './assets/my-works/task-managemnet-app/tasks/all-task2.png',
-          './assets/my-works/task-managemnet-app/tasks/all-task3.png',
-          './assets/my-works/task-managemnet-app/tasks/add-a-task.png'
-        ],
-        text: 'The task section is the core of the platform, allowing users to create, manage, and track tasks with clarity.\nUsers can switch between views like All Tasks, My Tasks, and Assigned by Me, making it easy to understand ownership and responsibility.\nEach task displays key details such as priority, due date, status, and assigned members, ensuring quick scanning and decision-making.\nThe task creation flow supports flexible inputs including subtasks, recurrence, attachments, and parent-child relationships, enabling structured task management.'
-      },
-      {
-        title: 'Reports',
-        images: [
-          './assets/my-works/task-managemnet-app/reports/report1.png',
-          './assets/my-works/task-managemnet-app/reports/reports.png'
-        ],
-        text: 'The reports section provides insights into task performance and team productivity.\nUsers can switch between personal and team views to analyze metrics such as completion rate, overdue tasks, efficiency score, and task distribution.\nVisual elements like charts and progress indicators make it easier to identify trends, measure performance, and support better decision-making.'
-      },
-      {
-        title: 'Notes Section',
-        images: [
-          './assets/my-works/task-managemnet-app/notes/notes1.png',
-          './assets/my-works/task-managemnet-app/notes/note-2.png',
-          './assets/my-works/task-managemnet-app/notes/note3.png'
-        ],
-        text: 'The notes section allows users to quickly capture ideas, meeting points, and important information.\nNotes are displayed in a simple card layout for easy access and organization.\nUsers can create new notes or directly convert notes into tasks, bridging the gap between planning and execution.\nThis ensures that no important idea is lost and can be seamlessly turned into actionable work.'
-      },
-      {
-        title: 'Team Section',
-        images: [
-          './assets/my-works/task-managemnet-app/team/team1.png'
-        ],
-        text: 'The team section provides a clear view of all team members along with their roles and responsibilities.\nUsers can assign tasks directly from this screen, making delegation faster and more efficient.\nRole-based visibility (such as admin, delegator, and delegatee) ensures structured collaboration and clear accountability across the team.'
-      }
-    ]
   }
 ];
 

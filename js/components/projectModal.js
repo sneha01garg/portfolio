@@ -554,12 +554,11 @@ class ProjectModal extends HTMLElement {
                 }
 
                 .screen-section .section-images img {
-                    max-width: 100%;
-                    max-height: 520px;
+                    height: 560px;
                     width: auto;
-                    height: auto;
+                    max-width: 100%;
                     display: block;
-                    flex: 0 1 auto;
+                    flex: 0 0 auto;
                     min-width: 0;
                 }
 
@@ -594,11 +593,183 @@ class ProjectModal extends HTMLElement {
                     }
 
                     .screen-section .section-images img {
-                        max-height: 400px;
+                        height: 360px;
                     }
 
                     .screen-section .section-heading {
                         font-size: 20px;
+                    }
+                }
+
+                /* Link placeholder */
+                .link-placeholder {
+                    border: 1px dashed #333;
+                    border-radius: 4px;
+                    padding: 32px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .link-placeholder-text {
+                    font-size: 13px;
+                    color: #444;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                }
+
+                /* Pull-quote */
+                .pull-quote {
+                    font-size: 42px;
+                    font-weight: 300;
+                    font-style: italic;
+                    line-height: 1.25;
+                    color: #fff;
+                    text-align: center;
+                    padding: 64px 32px;
+                    border-top: 1px solid #333;
+                    border-bottom: 1px solid #333;
+                    margin: 0;
+                    letter-spacing: 0.3px;
+                }
+
+                @media (max-width: 768px) {
+                    .pull-quote {
+                        font-size: 26px;
+                        padding: 40px 16px;
+                    }
+                }
+
+                /* Comparison table */
+                .comparison-wrap {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+
+                .comparison-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                .comparison-table th {
+                    text-align: left;
+                    padding: 12px 16px;
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    letter-spacing: 1.5px;
+                    color: #666;
+                    border-bottom: 1px solid #333;
+                    font-weight: 400;
+                }
+
+                .comparison-table td {
+                    padding: 14px 16px;
+                    font-size: 15px;
+                    line-height: 1.65;
+                    border-bottom: 1px solid #1e1e1e;
+                    vertical-align: top;
+                }
+
+                .comparison-table td:first-child {
+                    color: #888;
+                    width: 45%;
+                }
+
+                .comparison-table td:last-child {
+                    color: #e8e8e8;
+                }
+
+                .comparison-table tr:hover td {
+                    background: rgba(255,255,255,0.03);
+                }
+
+                /* Screens list — full-width, one per row */
+                .screens-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 48px;
+                }
+
+                .screen-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 14px;
+                }
+
+                .screen-item img {
+                    height: 620px;
+                    width: auto;
+                    max-width: 100%;
+                    display: block;
+                }
+
+                .screen-tags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    justify-content: center;
+                }
+
+                .screen-tag {
+                    background: rgba(255, 255, 255, 0.07);
+                    border: 1px solid rgba(255, 255, 255, 0.15);
+                    color: #aaa;
+                    font-size: 11px;
+                    padding: 4px 12px;
+                    border-radius: 20px;
+                    letter-spacing: 0.4px;
+                    text-transform: lowercase;
+                }
+
+                .screen-caption {
+                    font-size: 13px;
+                    color: #666;
+                    line-height: 1.6;
+                    text-align: center;
+                    max-width: 640px;
+                }
+
+                /* Thumbnails 2×2 grid */
+                .thumbnails-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 24px;
+                }
+
+                .thumbnail-item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                }
+
+                .thumbnail-item img {
+                    height: 340px;
+                    width: auto;
+                    max-width: 100%;
+                    display: block;
+                    margin: 0 auto;
+                }
+
+                .thumbnail-caption {
+                    font-size: 13px;
+                    color: #777;
+                    line-height: 1.5;
+                    padding-left: 2px;
+                }
+
+                @media (max-width: 768px) {
+                    .thumbnails-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .screen-item img {
+                        height: 400px;
+                    }
+
+                    .thumbnail-item img {
+                        height: 220px;
                     }
                 }
 
@@ -719,6 +890,74 @@ class ProjectModal extends HTMLElement {
                         ${sections.length > 0 ? `
                             <div class="screen-sections">
                                 ${sections.map(section => {
+                                    // Link placeholder
+                                    if (section.link) {
+                                        return `
+                                        <div class="screen-section">
+                                            ${section.title ? `<h3 class="section-heading">${section.title}</h3>` : ''}
+                                            <div class="link-placeholder">
+                                                <span class="link-placeholder-text">Link coming soon</span>
+                                            </div>
+                                        </div>`;
+                                    }
+                                    // Pull-quote
+                                    if (section.pullquote) {
+                                        return `<div class="screen-section"><blockquote class="pull-quote">${section.pullquote}</blockquote></div>`;
+                                    }
+                                    // Comparison table
+                                    if (section.comparison) {
+                                        return `
+                                        <div class="screen-section">
+                                            ${section.title ? `<h3 class="section-heading">${section.title}</h3>` : ''}
+                                            <div class="comparison-wrap">
+                                                ${section.text ? `<div class="section-text"><p>${section.text}</p></div>` : ''}
+                                                <table class="comparison-table">
+                                                    <thead><tr><th>Common approach</th><th>What this app does</th></tr></thead>
+                                                    <tbody>
+                                                        ${section.comparison.map(row => `<tr><td>${row.common}</td><td>${row.thisApp}</td></tr>`).join('')}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>`;
+                                    }
+                                    // Screens list
+                                    if (section.screens) {
+                                        return `
+                                        <div class="screen-section">
+                                            ${section.title ? `<h3 class="section-heading">${section.title}</h3>` : ''}
+                                            ${section.text ? `<div class="section-text"><p>${section.text}</p></div>` : ''}
+                                            <div class="screens-list">
+                                                ${section.screens.map(s => `
+                                                    <div class="screen-item">
+                                                        <img src="${s.image}" alt="${s.caption || ''}" loading="lazy" decoding="async">
+                                                        ${s.tags && s.tags.length > 0 ? `
+                                                            <div class="screen-tags">
+                                                                ${s.tags.map(tag => `<span class="screen-tag">${tag}</span>`).join('')}
+                                                            </div>
+                                                        ` : ''}
+                                                        ${s.caption ? `<span class="screen-caption">${s.caption}</span>` : ''}
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        </div>`;
+                                    }
+                                    // Thumbnails grid
+                                    if (section.thumbnails) {
+                                        return `
+                                        <div class="screen-section">
+                                            ${section.title ? `<h3 class="section-heading">${section.title}</h3>` : ''}
+                                            ${section.text ? `<div class="section-text"><p>${section.text}</p></div>` : ''}
+                                            <div class="thumbnails-grid">
+                                                ${section.thumbnails.map(t => `
+                                                    <div class="thumbnail-item">
+                                                        <img src="${t.image}" alt="${t.caption || ''}" loading="lazy" decoding="async">
+                                                        ${t.caption ? `<span class="thumbnail-caption">${t.caption}</span>` : ''}
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        </div>`;
+                                    }
+                                    // Default section
                                     const sectionImgs = Array.isArray(section.images)
                                         ? section.images
                                         : (section.image ? [section.image] : []);

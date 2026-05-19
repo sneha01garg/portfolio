@@ -140,17 +140,10 @@ class NavBar extends HTMLElement {
                     max-width: 1200px;
                     margin: 0 auto;
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: center;
                     align-items: center;
                     padding: 0 20px;
                     position: relative;
-                }
-
-                .logo {
-                    font-size: 1.5rem;
-                    font-weight: bold;
-                    color: #fff;
-                    z-index: 1001;
                 }
 
                 .hamburger {
@@ -222,6 +215,10 @@ class NavBar extends HTMLElement {
 
                 /* Mobile styles */
                 @media (max-width: 768px) {
+                    .navbar {
+                        justify-content: flex-end;
+                    }
+
                     .hamburger {
                         display: flex;
                     }
@@ -283,7 +280,6 @@ class NavBar extends HTMLElement {
 
             <div class="backdrop"></div>
             <div class="navbar">
-                <div class="logo">Portfolio</div>
                 <button class="hamburger" aria-label="Toggle menu">
                     <span></span>
                     <span></span>
