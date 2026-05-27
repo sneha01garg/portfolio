@@ -1,120 +1,5 @@
 const projectsData = [
   {
-    id: 1,
-    title: 'ASBL POSTER',
-    tools: 'Photoshop',
-    type: 'Ad Poster',
-    image: './assets/my-works/asbl-poster/1080x1080.png',
-    images: [
-      './assets/my-works/asbl-poster/1080x1080.png',
-      './assets/my-works/asbl-poster/1080x1920.png',
-      './assets/my-works/asbl-poster/bus-stop-mockup.png'
-    ],
-    projectOverview: 'Designed a high-impact real estate advertisement poster for ASBL, focused on clearly communicating urgency and value through strong visual hierarchy and bold composition.',
-    keyHighlights: [
-      'Created a bold typographic hierarchy with “30” as the focal point to grab attention instantly',
-      'Integrated architectural renders seamlessly with typography for a cohesive visual',
-      'Used a deep blue night color palette to convey a premium and aspirational feel',
-      'Focused on clarity and readability for large-format visibility'
-    ],
-    thumbnail: './assets/my-works/asbl-poster/bus-stop-mockup.png',
-    column: 2,
-    row: 2,
-  },
-  {
-    id: 2,
-    title: 'DUAL SENSE',
-    tools: 'Figma',
-    type: 'Product Design',
-    image: './assets/my-works/game-console/dualsense.png',
-    images: [
-      './assets/my-works/game-console/dualsense.png'
-    ],
-    projectOverview: 'Designed a modern product UI card for a gaming controller, focusing on visual depth, product clarity, and a premium e-commerce experience.',
-    keyHighlights: [
-      'Designed a glassmorphic-style UI card with soft gradients and layered depth',
-      'Created a clear visual hierarchy to highlight product name, pricing, and CTA',
-      'Used bold color contrasts to make the product stand out against the background',
-      'Integrated product-focused micro details like color options and action buttons',
-      'Focused on balance between aesthetics and usability for an e-commerce layout'
-    ],
-    thumbnail: './assets/my-works/game-console/dualsense.png',
-    column: 2,
-    row: 2,
-  },
-  {
-    id: 3,
-    title: 'FAST POSTER',
-    tools: 'Photoshop',
-    type: 'Ad Poster',
-    image: './assets/my-works/fast-poster/car-poster.png',
-    images: [
-      './assets/my-works/fast-poster/car-poster.png',
-      './assets/my-works/fast-poster/fast-mockup.png'
-    ],
-    projectOverview: 'Created a speed-themed experimental poster focused on conveying motion and impact through bold typography, composition, and visual flow.',
-    keyHighlights: [
-      'Used oversized typography as a primary design element to create scale and impact',
-      'Designed a dynamic composition by aligning the car’s movement with the typography',
-      'Applied directional flow to visually represent speed and motion',
-      'Balanced minimal color usage with strong contrast to maintain clarity',
-      'Focused on layout, spacing, and hierarchy to keep the design clean yet expressive'
-    ],
-    thumbnail: './assets/my-works/fast-poster/fast-mockup.png',
-    column: 2,
-    row: 2,
-  },
-  {
-    id: 4,
-    title: 'MALLUABLE',
-    tools: 'Illustrator',
-    type: 'Brand Identity',
-    image: './assets/my-works/business-card/business-card-1.jpg',
-    images: [
-      './assets/my-works/business-card/business-card-1.jpg',
-      './assets/my-works/business-card/business-card-2.jpg',
-      './assets/my-works/business-card/beige-minimalist-mockup-instagram-post.png'
-    ],
-    projectOverview: 'Designed a complete brand identity and business card system for a life coaching brand, focusing on elegance, clarity, and a premium visual tone.',
-    keyHighlights: [
-      'Created a minimal logo mark with geometric forms to represent growth and adaptability',
-      'Developed a cohesive brand color palette using deep blue and gold for a premium feel',
-      'Designed front and back business card layouts with clear information hierarchy',
-      'Focused on typography pairing to balance professionalism and approachability',
-      'Ensured print-ready alignment and spacing for real-world usage'
-    ],
-    thumbnail: './assets/my-works/business-card/beige-minimalist-mockup-instagram-post.png',
-    column: 2,
-    row: 2,
-  },
-  {
-    id: 5,
-    title: 'RECIPE BOOK',
-    tools: 'InDesign, Illustrator',
-    type: 'Print Design',
-    image: './assets/my-works/cook-book/cookbook.jpg',
-    images: [
-      './assets/my-works/cook-book/cookbook.jpg',
-      './assets/my-works/cook-book/cookbook2.jpg',
-      './assets/my-works/cook-book/cookbook3.jpg',
-      './assets/my-works/cook-book/cookbook4.jpg',
-      './assets/my-works/cook-book/cookbook-magazine.png',
-      './assets/my-works/cook-book/magazine-mockup-4.png'
-    ],
-    projectOverview: 'Designed a food magazine focused on dessert recipes, including cover design, inner page layouts, and a custom badge logo to create a cohesive editorial identity.',
-    keyHighlights: [
-      'Designed the magazine cover with strong visual hierarchy and branding',
-      'Created clean, readable inner page layouts for recipes and content flow',
-      'Designed a custom badge-style logo to reinforce the magazine’s identity',
-      'Focused on typography, spacing, and grid systems for editorial clarity',
-      'Ensured print-ready layout with consistent margins and alignment'
-    ],
-    thumbnail: './assets/my-works/cook-book/cookbook-magazine.png',
-    column: 2,
-    row: 2,
-
-  },
-  {
     id: 11,
     title: 'TASK MANAGEMENT APP',
     tools: 'Figma',
@@ -185,7 +70,6 @@ const projectsData = [
           { image: './assets/my-works/indusole/reports-team-annotated.png', caption: 'Reports (Team): per-member breakdown, top contributors, team-wide trends.', tags: ['reports', 'team overview', 'top contributors', 'team metrics'] }
         ]
       },
-
       {
         title: 'Reflection',
         items: [
@@ -200,6 +84,121 @@ const projectsData = [
         text: 'The Task module is one of several in the Indesol Global platform. Finance, ERP, and other modules share the same shell.'
       }
     ]
+  },
+  {
+    id: 1,
+    title: 'ASBL POSTER',
+    tools: 'Photoshop',
+    type: 'Ad Poster',
+    image: './assets/my-works/asbl-poster/1080x1080.png',
+    images: [
+      './assets/my-works/asbl-poster/1080x1080.png',
+      './assets/my-works/asbl-poster/1080x1920.png',
+      './assets/my-works/asbl-poster/bus-stop-mockup.png'
+    ],
+    projectOverview: 'Designed a high-impact real estate advertisement poster for ASBL, focused on clearly communicating urgency and value through strong visual hierarchy and bold composition.',
+    keyHighlights: [
+      'Created a bold typographic hierarchy with "30" as the focal point to grab attention instantly',
+      'Integrated architectural renders seamlessly with typography for a cohesive visual',
+      'Used a deep blue night color palette to convey a premium and aspirational feel',
+      'Focused on clarity and readability for large-format visibility'
+    ],
+    thumbnail: './assets/my-works/asbl-poster/bus-stop-mockup.png',
+    column: 2,
+    row: 2,
+  },
+  {
+    id: 2,
+    title: 'DUAL SENSE',
+    tools: 'Figma',
+    type: 'Product Design',
+    image: './assets/my-works/game-console/dualsense.png',
+    images: [
+      './assets/my-works/game-console/dualsense.png'
+    ],
+    projectOverview: 'Designed a modern product UI card for a gaming controller, focusing on visual depth, product clarity, and a premium e-commerce experience.',
+    keyHighlights: [
+      'Designed a glassmorphic-style UI card with soft gradients and layered depth',
+      'Created a clear visual hierarchy to highlight product name, pricing, and CTA',
+      'Used bold color contrasts to make the product stand out against the background',
+      'Integrated product-focused micro details like color options and action buttons',
+      'Focused on balance between aesthetics and usability for an e-commerce layout'
+    ],
+    thumbnail: './assets/my-works/game-console/dualsense.png',
+    column: 2,
+    row: 2,
+  },
+  {
+    id: 3,
+    title: 'FAST POSTER',
+    tools: 'Photoshop',
+    type: 'Ad Poster',
+    image: './assets/my-works/fast-poster/car-poster.png',
+    images: [
+      './assets/my-works/fast-poster/car-poster.png',
+      './assets/my-works/fast-poster/fast-mockup.png'
+    ],
+    projectOverview: 'Created a speed-themed experimental poster focused on conveying motion and impact through bold typography, composition, and visual flow.',
+    keyHighlights: [
+      'Used oversized typography as a primary design element to create scale and impact',
+      'Designed a dynamic composition by aligning the car\'s movement with the typography',
+      'Applied directional flow to visually represent speed and motion',
+      'Balanced minimal color usage with strong contrast to maintain clarity',
+      'Focused on layout, spacing, and hierarchy to keep the design clean yet expressive'
+    ],
+    thumbnail: './assets/my-works/fast-poster/fast-mockup.png',
+    column: 2,
+    row: 2,
+  },
+  {
+    id: 4,
+    title: 'MALLUABLE',
+    tools: 'Illustrator',
+    type: 'Brand Identity',
+    image: './assets/my-works/business-card/business-card-1.jpg',
+    images: [
+      './assets/my-works/business-card/business-card-1.jpg',
+      './assets/my-works/business-card/business-card-2.jpg',
+      './assets/my-works/business-card/beige-minimalist-mockup-instagram-post.png'
+    ],
+    projectOverview: 'Designed a complete brand identity and business card system for a life coaching brand, focusing on elegance, clarity, and a premium visual tone.',
+    keyHighlights: [
+      'Created a minimal logo mark with geometric forms to represent growth and adaptability',
+      'Developed a cohesive brand color palette using deep blue and gold for a premium feel',
+      'Designed front and back business card layouts with clear information hierarchy',
+      'Focused on typography pairing to balance professionalism and approachability',
+      'Ensured print-ready alignment and spacing for real-world usage'
+    ],
+    thumbnail: './assets/my-works/business-card/beige-minimalist-mockup-instagram-post.png',
+    column: 2,
+    row: 2,
+  },
+  {
+    id: 5,
+    title: 'RECIPE BOOK',
+    tools: 'InDesign, Illustrator',
+    type: 'Print Design',
+    image: './assets/my-works/cook-book/cookbook.jpg',
+    images: [
+      './assets/my-works/cook-book/cookbook.jpg',
+      './assets/my-works/cook-book/cookbook2.jpg',
+      './assets/my-works/cook-book/cookbook3.jpg',
+      './assets/my-works/cook-book/cookbook4.jpg',
+      './assets/my-works/cook-book/cookbook-magazine.png',
+      './assets/my-works/cook-book/magazine-mockup-4.png'
+    ],
+    projectOverview: 'Designed a food magazine focused on dessert recipes, including cover design, inner page layouts, and a custom badge logo to create a cohesive editorial identity.',
+    keyHighlights: [
+      'Designed the magazine cover with strong visual hierarchy and branding',
+      'Created clean, readable inner page layouts for recipes and content flow',
+      'Designed a custom badge-style logo to reinforce the magazine\'s identity',
+      'Focused on typography, spacing, and grid systems for editorial clarity',
+      'Ensured print-ready layout with consistent margins and alignment'
+    ],
+    thumbnail: './assets/my-works/cook-book/cookbook-magazine.png',
+    column: 2,
+    row: 2,
+
   },
   {
     id: 7,
@@ -259,7 +258,7 @@ const projectsData = [
     images: [
       './assets/my-works/emaildesign/emaildesign.png'
     ],
-    projectOverview: 'Designed a promotional email layout for the Unkissed sunscreen campaign, focused on driving engagement and conversions by highlighting product benefits for India’s hot and humid climate through clean visuals and clear messaging.',
+    projectOverview: 'Designed a promotional email layout for the Unkissed sunscreen campaign, focused on driving engagement and conversions by highlighting product benefits for India\'s hot and humid climate through clean visuals and clear messaging.',
     keyHighlights: [
       'Created a responsive-style email layout with clear structure and readability',
       'Designed brand-consistent visuals using the official color palette and typography',
@@ -340,7 +339,7 @@ function renderProjects() {
             text3="PROJECTS"
           ></vertical-fade-text>
         </div>
-        
+
         ${projectsData.slice(2).map(project => `
           <div class="project-card"
                onclick="openProjectModal(${project.id})"
@@ -356,7 +355,7 @@ function renderProjects() {
         `).join('')}
       </div>
     </div>
-    
+
     <project-modal id="project-modal"></project-modal>
   `;
 }
